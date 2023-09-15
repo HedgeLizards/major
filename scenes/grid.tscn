@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjjxyh5b3r32b"]
+
+[ext_resource type="Script" path="res://code/Vehicle.gd" id="1_5xkgu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ga8bv"]
+size = Vector3(0.9, 0.2, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jcd57"]
+transparency = 1
+albedo_color = Color(0, 0.501961, 1, 0.501961)
+
+[node name="Grid" type="Node3D"]
+script = ExtResource("1_5xkgu")
+
+[node name="Cell1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.1, -0.5)
+mesh = SubResource("BoxMesh_ga8bv")
+surface_material_override/0 = SubResource("StandardMaterial3D_jcd57")
+
+[node name="Cell2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.1, -0.5)
+mesh = SubResource("BoxMesh_ga8bv")
+surface_material_override/0 = SubResource("StandardMaterial3D_jcd57")
+
+[node name="Cell3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.1, 0.5)
+mesh = SubResource("BoxMesh_ga8bv")
+surface_material_override/0 = SubResource("StandardMaterial3D_jcd57")
+
+[node name="Cell4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.1, 0.5)
+mesh = SubResource("BoxMesh_ga8bv")
+surface_material_override/0 = SubResource("StandardMaterial3D_jcd57")
