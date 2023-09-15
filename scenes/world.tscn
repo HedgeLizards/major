@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://2irnh6o5hk08"]
+
+[ext_resource type="Texture2D" uid="uid://0sr0a0kr4dta" path="res://icon.svg" id="1_fj1aq"]
+
+[sub_resource type="Environment" id="Environment_jg4cu"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.37
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l287f"]
+size = Vector2(200, 300)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jw625"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7shco"]
+albedo_texture = ExtResource("1_fj1aq")
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jg4cu")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_l287f")
+skeleton = NodePath("../Player")
+
+[node name="Player" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_jw625")
+surface_material_override/0 = SubResource("StandardMaterial3D_7shco")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(0.991014, 0.0303445, -0.130274, 0, 0.973929, 0.226855, 0.133761, -0.224817, 0.965176, -1.30768, 1.25103, 5)
