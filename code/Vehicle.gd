@@ -7,6 +7,7 @@ var hovered_row
 var hovered_column
 var forward_speed := 5
 var rotation_speed := 1.0 * PI
+var is_local: bool
 
 @onready var grid = [
 	[null, null, null],
@@ -24,6 +25,9 @@ var rotation_speed := 1.0 * PI
 		$PlayerInput.set_multiplayer_authority(id)
 
 func _ready():
+	is_local = player == multiplayer.get_unique_id()
+	if is_local:
+		camera.make_current()
 	for r in grid.size():
 		for c in grid[0].size():
 			if grid[r][c] == null:

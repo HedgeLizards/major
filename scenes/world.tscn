@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://2irnh6o5hk08"]
+[gd_scene load_steps=10 format=3 uid="uid://2irnh6o5hk08"]
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_kh57m"]
 [ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
@@ -18,6 +18,8 @@ size = Vector2(200, 300)
 albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_pcac1"]
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_l5dm3"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_kh57m")
@@ -46,3 +48,6 @@ spawn_limit = 4
 
 [node name="Pebbles" parent="." instance=ExtResource("3_eww8l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000203848, 0, -2.81323)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = SubResource("MeshLibrary_l5dm3")
