@@ -8,10 +8,6 @@ var map = {}
 
 func tile_at(p: Vector2i) -> Tile:
 	return map.get(p, Tile.Rock)
-	if p.length() > 6 || p.length() == 0:
-		return Tile.Rock
-	else:
-		return Tile.Open
 
 func view(p: Vector2i):
 	var old_mesh: Node3D = mesh_map.get(p)
@@ -48,6 +44,3 @@ func _ready():
 			view(p)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

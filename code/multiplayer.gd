@@ -3,6 +3,8 @@ extends Node
 const PORT := 12023
 
 const world_scene: PackedScene = preload("res://scenes/world.tscn")
+enum Status {Start, HostLobby, ClientConnecting, ClientLobby, Game}
+var status = Status.Start
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,15 +15,15 @@ func _ready():
 
 
 
-func _on_host_button_pressed():
+func _on_host_button_pressed() -> void:
 	print("host pressed")
-	var peer: MultiplayerPeer = ENetMultiplayerPeer.new()
+	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 	peer.create_server(PORT)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		OS.alert("Failed to start multiplayer server.")
 		return
 	multiplayer.multiplayer_peer = peer
-	start_game()
+	start_lobby()
 
 
 func _on_join_button_pressed():
@@ -30,19 +32,43 @@ func _on_join_button_pressed():
 	if address == "":
 		OS.alert("Need a remote to connect to.")
 		return
+	multiplayer.connected_to_server.connect(start_lobby)
+	multiplayer.connection_failed.connect(back_to_main)
+	multiplayer.server_disconnected.connect(back_to_main)
 	var peer: MultiplayerPeer = ENetMultiplayerPeer.new()
-	peer.create_client(address, PORT)
+	if peer.create_client(address, PORT) != 0:
+		OS.alert("Failed to start multiplayer client.")
+		return
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		OS.alert("Failed to start multiplayer client.")
 		return
+#	print("join status ", peer.get_connection_status())
 	multiplayer.multiplayer_peer = peer
-	start_game()
+	$UI/Connecting.show()
+#	start_lobby()
 
+func back_to_main():
+	multiplayer.multiplayer_peer = null
+	$Lobby.hide()
+	$UI.show()
+	$UI/Connecting.hide()
+
+func start_lobby():
+	$UI.hide()
+	$Lobby.show()
+	
+	$Lobby/HostControls.visible = multiplayer.is_server()
+	if multiplayer.is_server():
+		$Lobby/HostControls/IpAddresses.text = "\n".join(IP.get_local_addresses())
+
+@rpc("authority", "call_local", "reliable")
 func start_game():
 	print("starting game")
 	$UI.hide()
+	$Lobby.hide()
 #	var world := world_scene.instantiate()
 #	add_child(world, true)
+	multiplayer.multiplayer_peer.refuse_new_connections = true
 	if multiplayer.is_server():
 		change_level.call_deferred(load("res://scenes/world.tscn"))
 
@@ -55,4 +81,9 @@ func change_level(scene: PackedScene):
 		c.queue_free()
 	# Add new level.
 	level.add_child(scene.instantiate())
+
+
+
+func _on_start_button_pressed():
+	start_game.rpc()
 
