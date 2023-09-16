@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://2irnh6o5hk08"]
 
-[ext_resource type="PackedScene" uid="uid://dukdcih3ch01f" path="res://scenes/vehicle.tscn" id="1_y0lji"]
+[ext_resource type="Script" path="res://code/world.gd" id="1_kh57m"]
 
 [sub_resource type="Environment" id="Environment_jg4cu"]
 ambient_light_source = 2
@@ -18,18 +18,24 @@ albedo_color = Color(0, 0, 1, 1)
 [sub_resource type="CylinderMesh" id="CylinderMesh_pcac1"]
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_kh57m")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jg4cu")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_l287f")
-skeleton = NodePath("../Vehicle")
+skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_leg26")
-
-[node name="Vehicle" parent="." instance=ExtResource("1_y0lji")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98669, 0, 0)
 material_override = SubResource("StandardMaterial3D_sdyhi")
 mesh = SubResource("CylinderMesh_pcac1")
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/vehicle.tscn")
+spawn_path = NodePath("../Players")
+spawn_limit = 4

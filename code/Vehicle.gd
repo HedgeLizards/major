@@ -5,6 +5,14 @@ var forward_speed := 5
 var rotation_speed := 1.0 * PI
 
 @onready var camera = $Camera3D
+@onready var input := $PlayerInput
+
+# Set by the authority, synchronized on spawn.
+@export var player := 1 :
+	set(id):
+		player = id
+		# Give authority over the player input to the appropriate peer.
+		$PlayerInput.set_multiplayer_authority(id)
 
 func _unhandled_input(event):
 	if !event is InputEventMouseMotion:
@@ -41,7 +49,7 @@ func _unhandled_input(event):
 
 
 func _physics_process(delta: float):
-	var inp := Input.get_vector("right", "left", "forward", "backward")
+	var inp: Vector2 = input.inp
 	var rot := rotation_speed * inp.x * delta
 	var speed := forward_speed * inp.y * delta
 	$Body.rotation.y += rot

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dukdcih3ch01f"]
+[gd_scene load_steps=13 format=3 uid="uid://dukdcih3ch01f"]
 
 [ext_resource type="Texture2D" uid="uid://0sr0a0kr4dta" path="res://icon.svg" id="1_fsdsb"]
 [ext_resource type="Script" path="res://code/Vehicle.gd" id="2_ewdcd"]
+[ext_resource type="Script" path="res://code/playerinput.gd" id="3_8kft6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_jw625"]
 
@@ -26,6 +27,26 @@ albedo_color = Color(0, 0.501961, 1, 0.501961)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_044sg"]
 transparency = 1
 albedo_color = Color(0, 0.501961, 1, 0.501961)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34npo"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = true
+properties/1/path = NodePath("Body:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = true
+properties/2/path = NodePath(".:player")
+properties/2/spawn = true
+properties/2/sync = false
+properties/2/watch = false
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_db0ja"]
+properties/0/path = NodePath("PlayerInput:inp")
+properties/0/spawn = false
+properties/0/sync = true
+properties/0/watch = false
 
 [node name="Vehicle" type="Node3D"]
 script = ExtResource("2_ewdcd")
@@ -69,3 +90,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 shadow_enabled = true
 omni_range = 15.0
 omni_attenuation = 0.120742
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_34npo")
+
+[node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_db0ja")
+script = ExtResource("3_8kft6")
