@@ -213,8 +213,8 @@ func _physics_process(delta: float):
 	# position.z += vel.y
 	# $/root/Multiplayer/World/World/Environment.dig($Body.global_position)
 
-	print(AudioServer.get_bus_volume_db(1))
-	print(AudioServer.get_bus_volume_db(2))
+	# print(AudioServer.get_bus_volume_db(1))
+	# print(AudioServer.get_bus_volume_db(2))
 
 	# For testing sound and music, as well as the two functions test_sound() and test_fire().
 	test_sound()

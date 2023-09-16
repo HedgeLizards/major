@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_kh57m"]
 [ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
-[ext_resource type="PackedScene" path="res://scenes/pebbles.tscn" id="3_eww8l"]
+[ext_resource type="PackedScene" uid="uid://c6eg277q0xoij" path="res://scenes/pebbles.tscn" id="3_eww8l"]
 [ext_resource type="Script" path="res://code/Environment.gd" id="4_c36pg"]
 
 [sub_resource type="Environment" id="Environment_jg4cu"]
