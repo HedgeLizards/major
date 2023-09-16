@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://2irnh6o5hk08"]
+[gd_scene load_steps=9 format=3 uid="uid://2irnh6o5hk08"]
 
 [ext_resource type="PackedScene" uid="uid://dukdcih3ch01f" path="res://scenes/vehicle.tscn" id="1_y0lji"]
 [ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
+[ext_resource type="PackedScene" uid="uid://c6eg277q0xoij" path="res://scenes/pebbles.tscn" id="3_eww8l"]
 
 [sub_resource type="Environment" id="Environment_jg4cu"]
 ambient_light_source = 2
@@ -36,3 +37,6 @@ material_override = SubResource("StandardMaterial3D_sdyhi")
 mesh = SubResource("CylinderMesh_pcac1")
 
 [node name="BuildMenu" parent="." instance=ExtResource("2_8cdw3")]
+
+[node name="Pebbles" parent="." instance=ExtResource("3_eww8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000203848, 0, -2.81323)
