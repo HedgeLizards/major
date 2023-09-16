@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://2irnh6o5hk08"]
+[gd_scene load_steps=12 format=3 uid="uid://2irnh6o5hk08"]
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_kh57m"]
 [ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
 [ext_resource type="PackedScene" uid="uid://c6eg277q0xoij" path="res://scenes/pebbles.tscn" id="3_eww8l"]
-[ext_resource type="PackedScene" uid="uid://bm0ujyi38s287" path="res://scenes/music.tscn" id="4_ocrme"]
+[ext_resource type="Script" path="res://code/grid.gd" id="4_d4llk"]
+[ext_resource type="Script" path="res://code/Environment.gd" id="5_0w7rj"]
 
 [sub_resource type="Environment" id="Environment_jg4cu"]
 ambient_light_source = 2
@@ -52,7 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000203848, 0, -2.81323)
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = SubResource("MeshLibrary_l5dm3")
+script = ExtResource("4_d4llk")
 
 [node name="Environment" type="Node3D" parent="."]
-
-[node name="Music" parent="." instance=ExtResource("4_ocrme")]
+script = ExtResource("5_0w7rj")
