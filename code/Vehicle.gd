@@ -165,11 +165,10 @@ func _notification(what):
 		move_placeholder(get_viewport().get_mouse_position())
 
 func _physics_process(delta: float):
-	var inp: Vector2 = input.inp
-	if inp.x != 0:
+	if input.rot != 0:
 		move_placeholder(get_viewport().get_mouse_position())
-	var rot := rotation_speed * inp.x * delta
-	var speed := forward_speed * inp.y * delta
+	var rot: float = -rotation_speed * input.rot * delta
+	var speed: float = -forward_speed * input.speed * delta
 	$Body.rotation.y += rot
 	var vel := Vector2(0, speed).rotated($Body.rotation.y)
 	position.x -= vel.x

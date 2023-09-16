@@ -1,7 +1,8 @@
 extends MultiplayerSynchronizer
 
 
-@export var inp := Vector2(0, 0)
+@export var rot: float = 0.0
+@export var speed: float = 0.0
 
 func _ready():
 	# Only process for the local player.
@@ -10,6 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	inp = Input.get_vector("right", "left", "forward", "backward")
+	speed = Input.get_axis("backward", "forward")
+	rot = Input.get_axis("left", "right")
 #	if inp != Vector2(0, 0):
 #		print(inp)

@@ -19,10 +19,14 @@ properties/2/sync = false
 properties/2/watch = false
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_db0ja"]
-properties/0/path = NodePath("PlayerInput:inp")
+properties/0/path = NodePath("PlayerInput:rot")
 properties/0/spawn = false
 properties/0/sync = true
 properties/0/watch = false
+properties/1/path = NodePath("PlayerInput:speed")
+properties/1/spawn = false
+properties/1/sync = true
+properties/1/watch = false
 
 [node name="Vehicle" type="Node3D"]
 script = ExtResource("2_ewdcd")
