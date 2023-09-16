@@ -1,30 +1,22 @@
-extends Node3D
-
+extends GridMap
 
 enum Tile {Open, Rock}
 
-var mesh_map = {}
 var map = {}
 
 func tile_at(p: Vector2i) -> Tile:
 	return map.get(p, Tile.Rock)
 
 func view(p: Vector2i):
-	var old_mesh: Node3D = mesh_map.get(p)
-	if old_mesh:
-		old_mesh.queue_free()
-	var new_mesh: Node3D = mesh_for(tile_at(p))
-	mesh_map[p] = new_mesh
-	new_mesh.position.x = p.x
-	new_mesh.position.z = p.y
-	add_child(new_mesh)
+	set_cell_item(Vector3i(p.x, 0, p.y), grid_index_for(tile_at(p)))
 
-func mesh_for(tile: Tile):
+func grid_index_for(tile: Tile) -> int:
 	if tile == Tile.Open:
-		return preload("res://scenes/tiles/ground.tscn").instantiate()
-	elif tile == Tile.Rock:
-		return preload("res://scenes/tiles/rock.tscn").instantiate()
-	assert(false, "unknown tile")
+		return 1
+	if tile == Tile.Rock:
+		return 0
+	return -1
+
 
 func dig_tile(p: Vector2i) -> void:
 	map[p] = Tile.Open
