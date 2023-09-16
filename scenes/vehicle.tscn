@@ -30,34 +30,42 @@ albedo_color = Color(0, 0.501961, 1, 0.501961)
 [node name="Vehicle" type="Node3D"]
 script = ExtResource("2_ewdcd")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.991014, 0.0303444, -0.130274, 0.103771, 0.440125, 0.89192, 0.0844015, -0.897424, 0.433021, -1.308, 10, 4.083)
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_jw625")
 surface_material_override/0 = SubResource("StandardMaterial3D_7shco")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.991014, 0.0303444, -0.130274, 0, 0.973929, 0.226855, 0.133761, -0.224817, 0.965176, -1.30768, 1.75103, 5)
-
-[node name="Cell1" type="MeshInstance3D" parent="."]
+[node name="Cell1" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.1, -0.5)
 mesh = SubResource("BoxMesh_ga8bv")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_jcd57")
 
-[node name="Cell2" type="MeshInstance3D" parent="."]
+[node name="Cell2" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.1, -0.5)
 mesh = SubResource("BoxMesh_ga8bv")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_6xa04")
 
-[node name="Cell3" type="MeshInstance3D" parent="."]
+[node name="Cell3" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.1, 0.5)
 mesh = SubResource("BoxMesh_ga8bv")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_ohfkx")
 
-[node name="Cell4" type="MeshInstance3D" parent="."]
+[node name="Cell4" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.1, 0.5)
 mesh = SubResource("BoxMesh_ga8bv")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_044sg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shadow_enabled = true
+omni_range = 15.0
+omni_attenuation = 0.120742

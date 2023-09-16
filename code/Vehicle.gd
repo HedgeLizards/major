@@ -1,6 +1,8 @@
 extends Node3D
 
 var hovered_cell
+var forward_speed := 5
+var rotation_speed := 1.0 * PI
 
 @onready var camera = $Camera3D
 
@@ -30,9 +32,19 @@ func _unhandled_input(event):
 		return
 	
 	if hovered_cell != null:
-		get_node("Cell%d" % hovered_cell).get_surface_override_material(0).albedo_color = Color(0, 0.5, 1, 0.5)
+		get_node("Body/Cell%d" % hovered_cell).get_surface_override_material(0).albedo_color = Color(0, 0.5, 1, 0.5)
 	
 	hovered_cell = new_hovered_cell
 	
 	if hovered_cell != null:
-		get_node("Cell%d" % hovered_cell).get_surface_override_material(0).albedo_color = Color(1, 0.5, 0, 0.5)
+		get_node("Body/Cell%d" % hovered_cell).get_surface_override_material(0).albedo_color = Color(1, 0.5, 0, 0.5)
+
+
+func _physics_process(delta: float):
+	var inp := Input.get_vector("right", "left", "forward", "backward")
+	var rot := rotation_speed * inp.x * delta
+	var speed := forward_speed * inp.y * delta
+	$Body.rotation.y += rot
+	var vel := Vector2(0, speed).rotated($Body.rotation.y)
+	position.x -= vel.x
+	position.z += vel.y
