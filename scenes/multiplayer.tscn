@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2vsgksivpxba"]
+[gd_scene load_steps=3 format=3 uid="uid://d2vsgksivpxba"]
 
 [ext_resource type="Script" path="res://code/multiplayer.gd" id="1_wf8mf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_chfie"]
+font_size = 32
 
 [node name="Multiplayer" type="Node"]
 script = ExtResource("1_wf8mf")
@@ -34,6 +37,54 @@ offset_right = 121.0
 offset_bottom = 96.0
 text = "localhost"
 
+[node name="Connecting" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 188.0
+offset_top = 68.0
+offset_right = 292.0
+offset_bottom = 94.0
+text = "connecting
+"
+
+[node name="Lobby" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Lobby"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 28.0
+offset_right = 524.0
+offset_bottom = 136.0
+text = "Waiting for start"
+label_settings = SubResource("LabelSettings_chfie")
+
+[node name="HostControls" type="Control" parent="Lobby"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="IpAddresses" type="Label" parent="Lobby/HostControls"]
+layout_mode = 0
+offset_left = 282.0
+offset_top = 107.0
+offset_right = 677.0
+offset_bottom = 430.0
+text = "ip "
+
+[node name="StartButton" type="Button" parent="Lobby/HostControls"]
+layout_mode = 0
+offset_left = 614.0
+offset_top = 25.0
+offset_right = 730.0
+offset_bottom = 84.0
+text = "Start"
+
 [node name="World" type="Node" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
@@ -43,3 +94,4 @@ spawn_limit = 1
 
 [connection signal="pressed" from="UI/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="UI/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="Lobby/HostControls/StartButton" to="." method="_on_start_button_pressed"]

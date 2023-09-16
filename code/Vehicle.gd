@@ -37,7 +37,7 @@ func is_local():
 	return player == multiplayer.get_unique_id()
 
 func _ready():
-	if is_local:
+	if is_local():
 		camera.make_current()
 	
 	for r in grid.size():
@@ -174,3 +174,5 @@ func _physics_process(delta: float):
 	var vel := Vector2(0, speed).rotated($Body.rotation.y)
 	position.x -= vel.x
 	position.z += vel.y
+	$/root/Multiplayer/World/World/Environment.dig(Vector2(global_position.x, global_position.z))
+

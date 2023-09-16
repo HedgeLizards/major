@@ -9,7 +9,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	inp = Input.get_vector("right", "left", "forward", "backward")
 #	if inp != Vector2(0, 0):
 #		print(inp)
