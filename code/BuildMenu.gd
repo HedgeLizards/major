@@ -36,12 +36,16 @@ func _on_build_toggled(button_pressed):
 	var tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
 	
 	if button_pressed:
+		$Build.mouse_filter = Control.MOUSE_FILTER_PASS
+		
 		for i in number_of_v_box_containers:
 			var v_box_container = get_child(i)
 			
 			tween.tween_property(v_box_container, 'offset_right', (number_of_v_box_containers - i) * -100 * screen_scale, 0.4)
 			tween.tween_property(v_box_container, 'modulate:a', 1, 0.4)
 	else:
+		$Build.mouse_filter = Control.MOUSE_FILTER_STOP
+		
 		for i in number_of_v_box_containers:
 			var v_box_container = get_child(i)
 			

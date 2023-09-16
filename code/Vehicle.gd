@@ -124,6 +124,9 @@ func move_placeholder(mouse_position):
 		$Body/Placeholder.position.z = hovered_row - core_row
 
 func disable_placeholder():
+	if placing == null:
+		return
+	
 	$Body/Placeholder.queue_free()
 	
 	placing = null
@@ -136,7 +139,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		move_placeholder(event.position)
 	elif event is InputEventMouseButton:
-		if event.button_index != MOUSE_BUTTON_LEFT || !event.pressed || hovered_row == null:
+		if event.button_index != MOUSE_BUTTON_LEFT || event.pressed || hovered_row == null:
 			return
 		
 		var component = [
@@ -157,7 +160,7 @@ func _unhandled_input(event):
 		
 		disable_placeholder()
 	elif event is InputEventKey:
-		if event.keycode == KEY_ESCAPE && placing != null:
+		if event.keycode == KEY_ESCAPE:
 			disable_placeholder()
 
 func _notification(what):
@@ -165,8 +168,6 @@ func _notification(what):
 		move_placeholder(get_viewport().get_mouse_position())
 
 func _physics_process(delta: float):
-	if input.rot != 0:
-		move_placeholder(get_viewport().get_mouse_position())
 	var rot: float = -rotation_speed * input.rot * delta
 	# var speed: float = -forward_speed * input.speed * delta
 #	rotation.y += rot
@@ -175,12 +176,31 @@ func _physics_process(delta: float):
 	# position.z += vel.y
 	# $/root/Multiplayer/World/World/Environment.dig($Body.global_position)
 
+	print(AudioServer.get_bus_volume_db(1))
+	print(AudioServer.get_bus_volume_db(2))
+
+	# For testing sound and music, as well as the two functions test_sound() and test_fire().
+	test_sound()
+	test_fire()
+
+
 func _integrate_forces(state):
 	var velocity = Vector2()
-
 
 	state.angular_velocity = Vector3(0, -input.rot * rotation_speed,0).rotated(Vector3(0, 1, 0), rotation.y)
 #	rotation.y += input.rot * rotation_speed
 
 	state.linear_velocity = Vector3(0, 0, -input.speed * forward_speed).rotated(Vector3(0, 1, 0), rotation.y)
 
+
+	
+func test_sound():
+	var bgm = $BGM;
+	
+	if Input.is_action_just_pressed("sound_swap"):
+		bgm.crossfade_buses(bgm.COMBAT if bgm.current_track == bgm.MAIN else bgm.MAIN, 2)
+		print(bgm.current_track);
+
+func test_fire():
+	if Input.is_action_just_pressed("fire"):
+		$SFX/Fire.play()

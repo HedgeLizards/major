@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dukdcih3ch01f"]
+[gd_scene load_steps=9 format=3 uid="uid://dukdcih3ch01f"]
 
 [ext_resource type="Script" path="res://code/Vehicle.gd" id="2_ewdcd"]
 [ext_resource type="Script" path="res://code/playerinput.gd" id="3_8kft6"]
 [ext_resource type="PackedScene" uid="uid://bs0x170nmf570" path="res://scenes/core.tscn" id="3_ac747"]
+[ext_resource type="PackedScene" uid="uid://byo5lsrymng5k" path="res://scenes/bgm.tscn" id="4_m7n3s"]
+[ext_resource type="PackedScene" uid="uid://faxdrvsdtivq" path="res://scenes/sfx.tscn" id="5_f8oks"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34npo"]
 properties/0/path = NodePath(".:position")
@@ -19,14 +21,10 @@ properties/2/sync = true
 properties/2/watch = false
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_db0ja"]
-properties/0/path = NodePath("PlayerInput:rot")
+properties/0/path = NodePath("PlayerInput:inp")
 properties/0/spawn = false
 properties/0/sync = true
 properties/0/watch = false
-properties/1/path = NodePath("PlayerInput:speed")
-properties/1/spawn = false
-properties/1/sync = true
-properties/1/watch = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8pbls"]
 
@@ -60,3 +58,7 @@ script = ExtResource("3_8kft6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_8pbls")
+
+[node name="BGM" parent="." instance=ExtResource("4_m7n3s")]
+
+[node name="SFX" parent="." instance=ExtResource("5_f8oks")]
