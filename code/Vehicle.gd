@@ -174,5 +174,5 @@ func _physics_process(delta: float):
 	var vel := Vector2(0, speed).rotated($Body.rotation.y)
 	position.x -= vel.x
 	position.z += vel.y
-	$/root/Multiplayer/World/World/Environment.dig(Vector2(global_position.x, global_position.z))
+	$/root/Multiplayer/World/World/Environment.dig($Body.global_position)
 
