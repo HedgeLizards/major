@@ -48,7 +48,7 @@ func _unhandled_input(event):
 		
 		if new_hovered_row < 0 || new_hovered_row >= grid.size() || \
 			new_hovered_column < 0 || new_hovered_column >= grid[0].size() || \
-			grid[new_hovered_row][new_hovered_column].name == 'Core':
+			grid[new_hovered_row][new_hovered_column].name == 'Engine':
 			new_hovered_row = null
 			new_hovered_column = null
 	
