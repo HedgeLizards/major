@@ -1,10 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3bkqnsp2ha6r"]
+[gd_scene load_steps=2 format=3 uid="uid://c3bkqnsp2ha6r"]
 
 [ext_resource type="PackedScene" uid="uid://bex7pcrgwp2ex" path="res://models/Modules/Battery.gltf" id="1_8kfde"]
-[ext_resource type="Script" path="res://code/Battery.gd" id="1_gyl6v"]
 
-[node name="Battery" instance=ExtResource("1_8kfde")]
-script = ExtResource("1_gyl6v")
+[node name="BatteryMesh" instance=ExtResource("1_8kfde")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Core_001" parent="." index="0"]
 transform = Transform3D(0.4356, 0, 0, 0, 0.4356, 0, 0, 0, 0.4356, 2.08165e-12, 2.08165e-12, 2.08165e-12)

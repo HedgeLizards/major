@@ -1,10 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://1r5kph24y6bi"]
+[gd_scene load_steps=2 format=3 uid="uid://1r5kph24y6bi"]
 
-[ext_resource type="Script" path="res://code/Shield.gd" id="1_8jmps"]
 [ext_resource type="PackedScene" uid="uid://c3dru3hyquoma" path="res://models/Modules/Shield.gltf" id="1_bgpgd"]
 
-[node name="Shield" instance=ExtResource("1_bgpgd")]
-script = ExtResource("1_8jmps")
+[node name="ShieldMesh" instance=ExtResource("1_bgpgd")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Core_002" parent="." index="0"]
 transform = Transform3D(0.4356, 0, 0, 0, 0.4356, 0, 0, 0, 0.4356, 2.08165e-12, 2.08165e-12, 2.08165e-12)

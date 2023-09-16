@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqyvkiou11o8"]
-
-[ext_resource type="Script" path="res://code/Wheel.gd" id="1_7ggqh"]
-[ext_resource type="PackedScene" uid="uid://c31uj44aqebea" path="res://models/Modules/Wheel.gltf" id="1_q5yla"]
-
-[node name="Wheel" instance=ExtResource("1_q5yla")]
-script = ExtResource("1_7ggqh")

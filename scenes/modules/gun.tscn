@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://1eem1pvt6qw3"]
+
+[ext_resource type="PackedScene" uid="uid://cph0xkn0a38ev" path="res://scenes/meshes/gun_mesh.tscn" id="1_4qoln"]
+[ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_8v83c"]
+[ext_resource type="Script" path="res://code/Gun.gd" id="2_mlcld"]
+
+[node name="Gun" type="CollisionShape3D"]
+shape = ExtResource("1_8v83c")
+script = ExtResource("2_mlcld")
+
+[node name="GunMesh" parent="." instance=ExtResource("1_4qoln")]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckpvajt4lor3f"]
+
+[ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_q7unj"]
+[ext_resource type="PackedScene" uid="uid://1r5kph24y6bi" path="res://scenes/meshes/shield_mesh.tscn" id="1_tdta0"]
+[ext_resource type="Script" path="res://code/Shield.gd" id="2_cpahf"]
+
+[node name="Shield" type="CollisionShape3D"]
+shape = ExtResource("1_q7unj")
+script = ExtResource("2_cpahf")
+
+[node name="ShieldMesh" parent="." instance=ExtResource("1_tdta0")]

@@ -1,10 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b103ggyex3ymn"]
+[gd_scene load_steps=2 format=3 uid="uid://b103ggyex3ymn"]
 
 [ext_resource type="PackedScene" uid="uid://d0tfrlvhhrxu0" path="res://models/Modules/Drill.gltf" id="1_3dus3"]
-[ext_resource type="Script" path="res://code/Drill.gd" id="1_5gdtq"]
 
-[node name="Drill" instance=ExtResource("1_3dus3")]
-script = ExtResource("1_5gdtq")
+[node name="DrillMesh" instance=ExtResource("1_3dus3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Cone" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)

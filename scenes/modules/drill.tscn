@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://3h1kh3nyq82u"]
+
+[ext_resource type="PackedScene" uid="uid://b103ggyex3ymn" path="res://scenes/meshes/drill_mesh.tscn" id="1_fhb5y"]
+[ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_jr5t1"]
+[ext_resource type="Script" path="res://code/Drill.gd" id="1_pyajo"]
+
+[node name="Drill" type="Area3D"]
+input_ray_pickable = false
+monitorable = false
+script = ExtResource("1_pyajo")
+
+[node name="DrillMesh" parent="." instance=ExtResource("1_fhb5y")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = ExtResource("1_jr5t1")

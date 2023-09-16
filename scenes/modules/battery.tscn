@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://depl8bc53npmn"]
+
+[ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_015r7"]
+[ext_resource type="PackedScene" uid="uid://c3bkqnsp2ha6r" path="res://scenes/meshes/battery_mesh.tscn" id="1_myaw0"]
+[ext_resource type="Script" path="res://code/Battery.gd" id="2_b4l0c"]
+
+[node name="Battery" type="CollisionShape3D"]
+shape = ExtResource("1_015r7")
+script = ExtResource("2_b4l0c")
+
+[node name="BatteryMesh" parent="." instance=ExtResource("1_myaw0")]

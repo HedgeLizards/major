@@ -1,12 +1,12 @@
 extends RigidBody3D
 
-var Free = preload('res://scenes/free.tscn')
-var Drill = preload('res://scenes/drill.tscn')
-var Battery = preload('res://scenes/battery.tscn')
-var Wheel = preload('res://scenes/wheel.tscn')
-var Gun = preload('res://scenes/gun.tscn')
-var Shield = preload('res://scenes/shield.tscn')
-var Mine = preload('res://scenes/mine.tscn')
+var Free = preload('res://scenes/modules/free.tscn')
+var Drill = preload('res://scenes/modules/drill.tscn')
+var Battery = preload('res://scenes/modules/battery.tscn')
+var Wheel = preload('res://scenes/modules/wheel.tscn')
+var Gun = preload('res://scenes/modules/gun.tscn')
+var Shield = preload('res://scenes/modules/shield.tscn')
+var Mine = preload('res://scenes/modules/mine.tscn')
 var invalid = preload('res://resources/invalid.tres')
 
 var core_row = 1
@@ -121,12 +121,12 @@ func move_placeholder(mouse_position):
 			hovered_column = null
 	
 	if hovered_row == null:
-		$Body/Placeholder.set_surface_override_material(0, invalid)
+		$Body/Placeholder.get_child(0).set_surface_override_material(0, invalid)
 		
 		$Body/Placeholder.position.x = intersection_point.x
 		$Body/Placeholder.position.z = intersection_point.z
 	else:
-		$Body/Placeholder.set_surface_override_material(0, null)
+		$Body/Placeholder.get_child(0).set_surface_override_material(0, null)
 		
 		$Body/Placeholder.position.x = hovered_column - core_column
 		$Body/Placeholder.position.z = hovered_row - core_row
@@ -150,7 +150,7 @@ func _unhandled_input(event):
 		if event.button_index != MOUSE_BUTTON_LEFT || event.pressed || hovered_row == null:
 			return
 		
-		var component = [
+		var module = [
 			Drill,
 			Battery,
 			Wheel,
@@ -159,13 +159,13 @@ func _unhandled_input(event):
 			Mine,
 		][placing].instantiate()
 		
-		component.position.x = hovered_column - core_column
-		component.position.z = hovered_row - core_row
+		module.position.x = hovered_column - core_column
+		module.position.z = hovered_row - core_row
 		
-		$Body.add_child(component)
+		$Body.add_child(module)
 		
 		grid[hovered_row][hovered_column].queue_free()
-		grid[hovered_row][hovered_column] = component
+		grid[hovered_row][hovered_column] = module
 		
 		if hovered_row == 0:
 			core_row += 1
@@ -207,7 +207,9 @@ func _notification(what):
 func _physics_process(delta: float):
 	var rot: float = -rotation_speed * input.rot * delta
 	# var speed: float = -forward_speed * input.speed * delta
-#	rotation.y += rot
+	# rotation.y += rot
+	if rot != 0:
+		move_placeholder(get_viewport().get_mouse_position())
 	# var vel := Vector2(0, speed).rotated(rotation.y)
 	# position.x -= vel.x
 	# position.z += vel.y

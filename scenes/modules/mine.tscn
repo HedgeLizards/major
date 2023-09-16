@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://kg52e0rp2ham"]
+
+[ext_resource type="PackedScene" uid="uid://bq5fk4xuitqfi" path="res://scenes/meshes/mine_mesh.tscn" id="1_2wlar"]
+[ext_resource type="Script" path="res://code/Mine.gd" id="1_tdorm"]
+[ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="2_ay3h0"]
+
+[node name="Mine" type="Area3D"]
+input_ray_pickable = false
+monitorable = false
+script = ExtResource("1_tdorm")
+
+[node name="MineMesh" parent="." instance=ExtResource("1_2wlar")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = ExtResource("2_ay3h0")
