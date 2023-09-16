@@ -13,6 +13,7 @@ ambient_light_energy = 0.5
 size = Vector2(200, 300)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_leg26"]
+albedo_color = Color(0.639216, 0.494118, 0.0431373, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sdyhi"]
 albedo_color = Color(0, 0, 1, 1)
@@ -51,3 +52,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000203848, 0, -2.81323)
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = SubResource("MeshLibrary_l5dm3")
+
+[node name="Environment" type="Node3D" parent="."]
