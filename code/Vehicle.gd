@@ -177,3 +177,14 @@ func _physics_process(delta: float):
 	position.x -= vel.x
 	position.z += vel.y
 	$/root/Multiplayer/World/World/Environment.dig($Body.global_position)
+	
+	test_sound()
+	
+func test_sound():
+	var bgm = $BGM;
+	
+	if Input.is_action_just_pressed("sound_swap"):
+		bgm.crossfade_buses(bgm.COMBAT if bgm.current_track == bgm.MAIN else bgm.MAIN, 2)
+		print(bgm.current_track);
+		print(AudioServer.get_bus_volume_db(1))
+		print(AudioServer.get_bus_volume_db(2))

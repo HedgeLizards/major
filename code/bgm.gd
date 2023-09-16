@@ -11,7 +11,7 @@ func _ready():
 	for track in tracks:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(track), 0 if track == current_track else -50)
 
-func crossfade_buses(to_bus_name, duration, mute_atmosphere):
+func crossfade_buses(to_bus_name, duration):
 	if to_bus_name == current_track:
 		return;
 	
