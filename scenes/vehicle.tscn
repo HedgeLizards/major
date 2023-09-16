@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dukdcih3ch01f"]
+[gd_scene load_steps=7 format=3 uid="uid://dukdcih3ch01f"]
 
 [ext_resource type="Script" path="res://code/Vehicle.gd" id="2_ewdcd"]
 [ext_resource type="Script" path="res://code/playerinput.gd" id="3_8kft6"]
@@ -9,13 +9,13 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
 properties/0/watch = true
-properties/1/path = NodePath("Body:rotation")
+properties/1/path = NodePath(".:player")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = true
-properties/2/path = NodePath(".:player")
+properties/1/sync = false
+properties/1/watch = false
+properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
-properties/2/sync = false
+properties/2/sync = true
 properties/2/watch = false
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_db0ja"]
@@ -28,12 +28,18 @@ properties/1/spawn = false
 properties/1/sync = true
 properties/1/watch = false
 
-[node name="Vehicle" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_8pbls"]
+
+[node name="Vehicle" type="RigidBody3D"]
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
 script = ExtResource("2_ewdcd")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, -6.50845e-16, 1.74393e-16, 1.74393e-16, 0.5, 0.866025, -6.50845e-16, -0.866026, 0.5, 2.08165e-12, 8, 4.083)
 projection = 1
+fov = 37.8493
 size = 20.0
 
 [node name="Body" type="Node3D" parent="."]
@@ -51,3 +57,6 @@ replication_config = SubResource("SceneReplicationConfig_34npo")
 [node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_db0ja")
 script = ExtResource("3_8kft6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8pbls")

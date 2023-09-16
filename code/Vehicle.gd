@@ -1,4 +1,4 @@
-extends Node3D
+extends RigidBody3D
 
 var Free = preload('res://scenes/free.tscn')
 var Drill = preload('res://scenes/drill.tscn')
@@ -168,10 +168,19 @@ func _physics_process(delta: float):
 	if input.rot != 0:
 		move_placeholder(get_viewport().get_mouse_position())
 	var rot: float = -rotation_speed * input.rot * delta
-	var speed: float = -forward_speed * input.speed * delta
-	$Body.rotation.y += rot
-	var vel := Vector2(0, speed).rotated($Body.rotation.y)
-	position.x -= vel.x
-	position.z += vel.y
-	$/root/Multiplayer/World/World/Environment.dig($Body.global_position)
+	# var speed: float = -forward_speed * input.speed * delta
+#	rotation.y += rot
+	# var vel := Vector2(0, speed).rotated(rotation.y)
+	# position.x -= vel.x
+	# position.z += vel.y
+	# $/root/Multiplayer/World/World/Environment.dig($Body.global_position)
+
+func _integrate_forces(state):
+	var velocity = Vector2()
+
+
+	state.angular_velocity = Vector3(0, -input.rot * rotation_speed,0).rotated(Vector3(0, 1, 0), rotation.y)
+#	rotation.y += input.rot * rotation_speed
+
+	state.linear_velocity = Vector3(0, 0, -input.speed * forward_speed).rotated(Vector3(0, 1, 0), rotation.y)
 
