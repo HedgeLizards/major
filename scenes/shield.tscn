@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://1r5kph24y6bi"]
+
+[ext_resource type="Script" path="res://code/Shield.gd" id="1_8jmps"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sb158"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yiaii"]
+albedo_color = Color(0.75, 0.75, 0.75, 1)
+
+[node name="Shield" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_sb158")
+surface_material_override/0 = SubResource("StandardMaterial3D_yiaii")
+script = ExtResource("1_8jmps")

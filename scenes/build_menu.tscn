@@ -74,7 +74,7 @@ text = "2x Ore 2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Engine" type="Button" parent="VBoxContainer2"]
+[node name="Battery" type="Button" parent="VBoxContainer2"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
@@ -238,20 +238,20 @@ text = "BUILD"
 
 [connection signal="mouse_entered" from="VBoxContainer1/Drill" to="." method="show_labels" binds= [0]]
 [connection signal="mouse_exited" from="VBoxContainer1/Drill" to="." method="hide_labels" binds= [0]]
-[connection signal="pressed" from="VBoxContainer1/Drill" to="." method="_on_drill_pressed"]
-[connection signal="mouse_entered" from="VBoxContainer2/Engine" to="." method="show_labels" binds= [1]]
-[connection signal="mouse_exited" from="VBoxContainer2/Engine" to="." method="hide_labels" binds= [1]]
-[connection signal="pressed" from="VBoxContainer2/Engine" to="." method="_on_engine_pressed"]
+[connection signal="pressed" from="VBoxContainer1/Drill" to="." method="enable_placeholder" binds= [0]]
+[connection signal="mouse_entered" from="VBoxContainer2/Battery" to="." method="show_labels" binds= [1]]
+[connection signal="mouse_exited" from="VBoxContainer2/Battery" to="." method="hide_labels" binds= [1]]
+[connection signal="pressed" from="VBoxContainer2/Battery" to="." method="enable_placeholder" binds= [1]]
 [connection signal="mouse_entered" from="VBoxContainer3/Wheel" to="." method="show_labels" binds= [2]]
 [connection signal="mouse_exited" from="VBoxContainer3/Wheel" to="." method="hide_labels" binds= [2]]
-[connection signal="pressed" from="VBoxContainer3/Wheel" to="." method="_on_wheel_pressed"]
+[connection signal="pressed" from="VBoxContainer3/Wheel" to="." method="enable_placeholder" binds= [2]]
 [connection signal="mouse_entered" from="VBoxContainer4/Gun" to="." method="show_labels" binds= [3]]
 [connection signal="mouse_exited" from="VBoxContainer4/Gun" to="." method="hide_labels" binds= [3]]
-[connection signal="pressed" from="VBoxContainer4/Gun" to="." method="_on_gun_pressed"]
+[connection signal="pressed" from="VBoxContainer4/Gun" to="." method="enable_placeholder" binds= [3]]
 [connection signal="mouse_entered" from="VBoxContainer5/Shield" to="." method="show_labels" binds= [4]]
 [connection signal="mouse_exited" from="VBoxContainer5/Shield" to="." method="hide_labels" binds= [4]]
-[connection signal="pressed" from="VBoxContainer5/Shield" to="." method="_on_shield_pressed"]
+[connection signal="pressed" from="VBoxContainer5/Shield" to="." method="enable_placeholder" binds= [4]]
 [connection signal="mouse_entered" from="VBoxContainer6/Mine" to="." method="show_labels" binds= [5]]
 [connection signal="mouse_exited" from="VBoxContainer6/Mine" to="." method="hide_labels" binds= [5]]
-[connection signal="pressed" from="VBoxContainer6/Mine" to="." method="_on_mine_pressed"]
+[connection signal="pressed" from="VBoxContainer6/Mine" to="." method="enable_placeholder" binds= [5]]
 [connection signal="toggled" from="Build" to="." method="_on_build_toggled"]
