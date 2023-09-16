@@ -1,0 +1,257 @@
+[gd_scene load_steps=4 format=3 uid="uid://n81gfvtb48yt"]
+
+[ext_resource type="Script" path="res://code/BuildMenu.gd" id="1_acqg8"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_0qw6u"]
+device = -1
+keycode = 66
+unicode = 98
+
+[sub_resource type="Shortcut" id="Shortcut_73dm8"]
+events = [SubResource("InputEventKey_0qw6u")]
+
+[node name="BuildMenu" type="CanvasLayer"]
+script = ExtResource("1_acqg8")
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(100, 100)
+
+[node name="Label1" type="Label" parent="VBoxContainer1"]
+visible = false
+layout_mode = 2
+text = "3x Ore 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer1"]
+visible = false
+layout_mode = 2
+text = "2x Ore 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Drill" type="Button" parent="VBoxContainer1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "DRILL"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(100, 100)
+
+[node name="Label1" type="Label" parent="VBoxContainer2"]
+visible = false
+layout_mode = 2
+text = "3x Ore 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer2"]
+visible = false
+layout_mode = 2
+text = "2x Ore 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Engine" type="Button" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "ENGINE"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(100, 100)
+
+[node name="Label1" type="Label" parent="VBoxContainer3"]
+visible = false
+layout_mode = 2
+text = "3x Ore 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer3"]
+visible = false
+layout_mode = 2
+text = "2x Ore 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Wheel" type="Button" parent="VBoxContainer3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "WHEEL"
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(100, 100)
+
+[node name="Label1" type="Label" parent="VBoxContainer4"]
+visible = false
+layout_mode = 2
+text = "3x Ore 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer4"]
+visible = false
+layout_mode = 2
+text = "2x Ore 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gun" type="Button" parent="VBoxContainer4"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "GUN"
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(100, 100)
+
+[node name="Label1" type="Label" parent="VBoxContainer5"]
+visible = false
+layout_mode = 2
+text = "3x Ore 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer5"]
+visible = false
+layout_mode = 2
+text = "2x Ore 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shield" type="Button" parent="VBoxContainer5"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "SHIELD"
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(100, 100)
+
+[node name="Label1" type="Label" parent="VBoxContainer6"]
+visible = false
+layout_mode = 2
+text = "3x Ore 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer6"]
+visible = false
+layout_mode = 2
+text = "2x Ore 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mine" type="Button" parent="VBoxContainer6"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "MINE"
+
+[node name="Build" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(100, 100)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut = SubResource("Shortcut_73dm8")
+shortcut_feedback = false
+text = "BUILD"
+
+[connection signal="mouse_entered" from="VBoxContainer1/Drill" to="." method="_on_drill_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer1/Drill" to="." method="_on_drill_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer1/Drill" to="." method="_on_drill_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer2/Engine" to="." method="_on_engine_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer2/Engine" to="." method="_on_engine_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer2/Engine" to="." method="_on_engine_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer3/Wheel" to="." method="_on_wheel_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer3/Wheel" to="." method="_on_wheel_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer3/Wheel" to="." method="_on_wheel_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer4/Gun" to="." method="_on_gun_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer4/Gun" to="." method="_on_gun_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer4/Gun" to="." method="_on_gun_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer5/Shield" to="." method="_on_shield_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer5/Shield" to="." method="_on_shield_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer5/Shield" to="." method="_on_shield_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer6/Mine" to="." method="_on_mine_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer6/Mine" to="." method="_on_mine_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer6/Mine" to="." method="_on_mine_pressed"]
+[connection signal="toggled" from="Build" to="." method="_on_build_toggled"]

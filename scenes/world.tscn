@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://2irnh6o5hk08"]
+[gd_scene load_steps=8 format=3 uid="uid://2irnh6o5hk08"]
 
 [ext_resource type="PackedScene" uid="uid://dukdcih3ch01f" path="res://scenes/vehicle.tscn" id="1_y0lji"]
+[ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
 
 [sub_resource type="Environment" id="Environment_jg4cu"]
 ambient_light_source = 2
@@ -33,3 +34,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_leg26")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98669, 0, 0)
 material_override = SubResource("StandardMaterial3D_sdyhi")
 mesh = SubResource("CylinderMesh_pcac1")
+
+[node name="BuildMenu" parent="." instance=ExtResource("2_8cdw3")]
