@@ -1,13 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cph0xkn0a38ev"]
+[gd_scene load_steps=3 format=3 uid="uid://cph0xkn0a38ev"]
 
 [ext_resource type="Script" path="res://code/Gun.gd" id="1_1llai"]
+[ext_resource type="PackedScene" uid="uid://cj125pbco74bh" path="res://models/Modules/Gun.gltf" id="1_jelu0"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_4g67b"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ui3ok"]
-albedo_color = Color(1, 0, 0, 1)
-
-[node name="Gun" type="MeshInstance3D"]
-mesh = SubResource("BoxMesh_4g67b")
-surface_material_override/0 = SubResource("StandardMaterial3D_ui3ok")
+[node name="Gun" instance=ExtResource("1_jelu0")]
 script = ExtResource("1_1llai")
+
+[node name="Gun2" parent="." index="0"]
+transform = Transform3D(0.9801, 0, 0, 0, -3.54062e-08, 0.972, 0, -0.81, -4.24875e-08, 0, 0, 0)

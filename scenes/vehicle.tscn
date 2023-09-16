@@ -1,12 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dukdcih3ch01f"]
+[gd_scene load_steps=6 format=3 uid="uid://dukdcih3ch01f"]
 
 [ext_resource type="Script" path="res://code/Vehicle.gd" id="2_ewdcd"]
 [ext_resource type="Script" path="res://code/playerinput.gd" id="3_8kft6"]
 [ext_resource type="PackedScene" uid="uid://bs0x170nmf570" path="res://scenes/core.tscn" id="3_ac747"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_qfcyh"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1u7y"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34npo"]
 properties/0/path = NodePath(".:position")
@@ -37,11 +33,6 @@ projection = 1
 size = 20.0
 
 [node name="Body" type="Node3D" parent="."]
-
-[node name="Placeholder" type="MeshInstance3D" parent="Body"]
-visible = false
-mesh = SubResource("BoxMesh_qfcyh")
-surface_material_override/0 = SubResource("StandardMaterial3D_g1u7y")
 
 [node name="Core" parent="Body" instance=ExtResource("3_ac747")]
 

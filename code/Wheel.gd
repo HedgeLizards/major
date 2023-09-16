@@ -1,3 +1,3 @@
-extends MeshInstance3D
+extends Node3D
 
 var available = false

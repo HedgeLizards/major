@@ -1,14 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs0x170nmf570"]
+[gd_scene load_steps=3 format=3 uid="uid://bs0x170nmf570"]
 
-[ext_resource type="Texture2D" uid="uid://0sr0a0kr4dta" path="res://icon.svg" id="1_qro18"]
+[ext_resource type="PackedScene" uid="uid://cnb7hyfsd3201" path="res://models/Modules/Core.gltf" id="1_0gxdk"]
 [ext_resource type="Script" path="res://code/Core.gd" id="2_mc08k"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_iip1c"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bsu6l"]
-albedo_texture = ExtResource("1_qro18")
-
-[node name="Core" type="MeshInstance3D"]
-mesh = SubResource("BoxMesh_iip1c")
-surface_material_override/0 = SubResource("StandardMaterial3D_bsu6l")
+[node name="Core" instance=ExtResource("1_0gxdk")]
 script = ExtResource("2_mc08k")
