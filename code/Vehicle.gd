@@ -40,9 +40,17 @@ func _ready():
 	if is_local():
 		camera.make_current()
 	
+	create_frees()
+
+func create_frees():
 	for r in grid.size():
 		for c in grid[0].size():
-			if grid[r][c] != null:
+			if grid[r][c] != null || (
+				(r == 0 || grid[r - 1][c] == null || grid[r - 1][c].available) && \
+				(r == grid.size() - 1 || grid[r + 1][c] == null || grid[r + 1][c].available) && \
+				(c == 0 || grid[r][c - 1] == null || grid[r][c - 1].available) && \
+				(c == grid[0].size() - 1 || grid[r][c + 1] == null || grid[r][c + 1].available)
+			):
 				continue
 			
 			var free = Free.instantiate()
@@ -156,7 +164,36 @@ func _unhandled_input(event):
 		
 		$Body.add_child(component)
 		
+		grid[hovered_row][hovered_column].queue_free()
 		grid[hovered_row][hovered_column] = component
+		
+		if hovered_row == 0:
+			core_row += 1
+			
+			var row = []
+			
+			row.resize(grid[0].size())
+			
+			grid.push_front(row)
+		
+		if hovered_row == grid.size() - 1:
+			var row = []
+			
+			row.resize(grid[0].size())
+			
+			grid.push_back(row)
+		
+		if hovered_column == 0:
+			core_column += 1
+			
+			for row in grid:
+				row.push_front(null)
+		
+		if hovered_column == grid[0].size() - 1:
+			for row in grid:
+				row.push_back(null)
+		
+		create_frees()
 		
 		disable_placeholder()
 	elif event is InputEventKey:
@@ -176,8 +213,8 @@ func _physics_process(delta: float):
 	# position.z += vel.y
 	# $/root/Multiplayer/World/World/Environment.dig($Body.global_position)
 
-	print(AudioServer.get_bus_volume_db(1))
-	print(AudioServer.get_bus_volume_db(2))
+	# print(AudioServer.get_bus_volume_db(1))
+	# print(AudioServer.get_bus_volume_db(2))
 
 	# For testing sound and music, as well as the two functions test_sound() and test_fire().
 	test_sound()
