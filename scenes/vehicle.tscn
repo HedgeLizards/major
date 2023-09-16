@@ -1,10 +1,47 @@
-[gd_scene load_steps=9 format=3 uid="uid://dukdcih3ch01f"]
+[gd_scene load_steps=13 format=3 uid="uid://dukdcih3ch01f"]
 
+[ext_resource type="PackedScene" uid="uid://d11d26auk6is0" path="res://scenes/head.tscn" id="2_2ftb2"]
 [ext_resource type="Script" path="res://code/Vehicle.gd" id="2_ewdcd"]
 [ext_resource type="Script" path="res://code/playerinput.gd" id="3_8kft6"]
 [ext_resource type="PackedScene" uid="uid://bs0x170nmf570" path="res://scenes/core.tscn" id="3_ac747"]
 [ext_resource type="PackedScene" uid="uid://byo5lsrymng5k" path="res://scenes/bgm.tscn" id="4_m7n3s"]
 [ext_resource type="PackedScene" uid="uid://faxdrvsdtivq" path="res://scenes/sfx.tscn" id="5_f8oks"]
+
+[sub_resource type="Animation" id="Animation_mi8mg"]
+resource_name = "Headbop"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Head:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.9, -0.25, 0, 0.25, 0, 0.7, -0.25, 0, 0.25, 0, 0.9, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.25, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_w87bd"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Head:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.9, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ye46k"]
+_data = {
+"Headbop": SubResource("Animation_mi8mg"),
+"RESET": SubResource("Animation_w87bd")
+}
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34npo"]
 properties/0/path = NodePath(".:position")
@@ -36,11 +73,19 @@ script = ExtResource("2_ewdcd")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, -6.50845e-16, 1.74393e-16, 1.74393e-16, 0.5, 0.866025, -6.50845e-16, -0.866026, 0.5, 2.08165e-12, 8, 4.083)
-projection = 1
-fov = 37.8493
 size = 20.0
 
 [node name="Body" type="Node3D" parent="."]
+
+[node name="Head" parent="Body" instance=ExtResource("2_2ftb2")]
+transform = Transform3D(-6.55671e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.2318e-16, 1.5, -5.2318e-16, -6.55671e-08, 2.08165e-12, 0.9, 2.08165e-12)
+
+[node name="Headbop" type="AnimationPlayer" parent="Body/Head"]
+root_node = NodePath("../../..")
+autoplay = "Headbop"
+libraries = {
+"": SubResource("AnimationLibrary_ye46k")
+}
 
 [node name="Core" parent="Body" instance=ExtResource("3_ac747")]
 
