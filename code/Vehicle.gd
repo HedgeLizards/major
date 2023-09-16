@@ -1,20 +1,29 @@
 extends Node3D
 
-var Placeholder = preload('res://scenes/placeholder.tscn')
+var Core = preload('res://scenes/core.tscn')
+var Free = preload('res://scenes/free.tscn')
+var Drill = preload('res://scenes/drill.tscn')
+var Battery = preload('res://scenes/battery.tscn')
+var Wheel = preload('res://scenes/wheel.tscn')
+var Gun = preload('res://scenes/gun.tscn')
+var Shield = preload('res://scenes/shield.tscn')
+var Mine = preload('res://scenes/mine.tscn')
+
 var core_row = 1
 var core_column = 1
+var placing
 var hovered_row
 var hovered_column
+
 var forward_speed := 5
 var rotation_speed := 1.0 * PI
-var is_local: bool
 
+@onready var camera = $Camera3D
 @onready var grid = [
 	[null, null, null],
-	[null, $Body/Engine, null],
+	[null, $Body/Core, null],
 	[null, null, null],
 ]
-@onready var camera = $Camera3D
 @onready var input := $PlayerInput
 
 # Set by the authority, synchronized on spawn.
@@ -24,61 +33,106 @@ var is_local: bool
 		# Give authority over the player input to the appropriate peer.
 		$PlayerInput.set_multiplayer_authority(id)
 
+func is_local():
+	return player == multiplayer.get_unique_id()
+
 func _ready():
-	is_local = player == multiplayer.get_unique_id()
 	if is_local:
 		camera.make_current()
+	
 	for r in grid.size():
 		for c in grid[0].size():
-			if grid[r][c] == null:
-				var placeholder = Placeholder.instantiate()
-				
-				grid[r][c] = placeholder
-				
-				placeholder.position.z = r - core_row
-				placeholder.position.x = c - core_column
-				
-				$Body.add_child(placeholder)
+			if grid[r][c] != null:
+				continue
+			
+			var free = Free.instantiate()
+			
+			free.position.x = c - core_column
+			free.position.y = -0.4
+			free.position.z = r - core_row
+			
+			$Body.add_child(free)
+			
+			grid[r][c] = free
 
-func _unhandled_input(event):
-	if !event is InputEventMouseMotion:
+func enable_placeholder(index):
+	placing = index
+	
+	$Body/Placeholder.get_surface_override_material(0).albedo_color = [
+		Color.WHITE,
+		Color.YELLOW,
+		Color.ORANGE,
+		Color.RED,
+		Color.GRAY,
+		Color.BLACK,
+	][placing]
+
+func move_placeholder(mouse_position):
+	if placing == null:
 		return
 	
-	var mouse_position = event.position
 	var intersection_point = Plane.PLANE_XZ.intersects_ray(
 		camera.project_ray_origin(mouse_position),
 		camera.project_ray_normal(mouse_position)
 	)
-	var new_hovered_row
-	var new_hovered_column
 	
-	if intersection_point != null:
+	if intersection_point == null:
+		hovered_row = null
+		hovered_column = null
+	else:
 		intersection_point = (intersection_point - position).rotated(Vector3.UP, -$Body.rotation.y)
 		
-		new_hovered_row = floor(intersection_point.z + 0.5) + core_row
-		new_hovered_column = floor(intersection_point.x + 0.5) + core_column
+		hovered_row = floor(intersection_point.z + 0.5) + core_row
+		hovered_column = floor(intersection_point.x + 0.5) + core_column
 		
-		if new_hovered_row < 0 || new_hovered_row >= grid.size() || \
-			new_hovered_column < 0 || new_hovered_column >= grid[0].size() || \
-			grid[new_hovered_row][new_hovered_column].name == 'Engine':
-			new_hovered_row = null
-			new_hovered_column = null
+		if hovered_row < 0 || hovered_row >= grid.size() || \
+			hovered_column < 0 || hovered_column >= grid[0].size() || \
+			grid[hovered_row][hovered_column] == null || !grid[hovered_row][hovered_column].available:
+			hovered_row = null
+			hovered_column = null
 	
-	if new_hovered_row == hovered_row && new_hovered_column == hovered_column:
-		return
-	
-	if hovered_row != null:
-		grid[hovered_row][hovered_column].get_surface_override_material(0).albedo_color = Color(0, 0.5, 1, 0.5)
+	if hovered_row == null:
+		$Body/Placeholder.visible = false
+	else:
+		$Body/Placeholder.visible = true
+		
+		$Body/Placeholder.position.x = hovered_column - core_column
+		$Body/Placeholder.position.z = hovered_row - core_row
 
-	hovered_row = new_hovered_row
-	hovered_column = new_hovered_column
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		move_placeholder(event.position)
+	elif event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !event.pressed && hovered_row != null:
+		var component = [
+			Drill,
+			Battery,
+			Wheel,
+			Gun,
+			Shield,
+			Mine,
+		][placing].instantiate()
+		
+		component.position.x = hovered_column - core_column
+		component.position.z = hovered_row - core_row
+		
+		$Body.add_child(component)
+		
+		grid[hovered_row][hovered_column] = component
+		
+		$Body/Placeholder.visible = false
+		
+		placing = null
+		hovered_row = null
+		hovered_column = null
 
-	if hovered_row != null:
-		grid[hovered_row][hovered_column].get_surface_override_material(0).albedo_color = Color(1, 0.5, 0, 0.5)
-
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
+		move_placeholder(get_viewport().get_mouse_position())
 
 func _physics_process(delta: float):
 	var inp: Vector2 = input.inp
+	if inp.x != 0:
+		move_placeholder(get_viewport().get_mouse_position())
 	var rot := rotation_speed * inp.x * delta
 	var speed := forward_speed * inp.y * delta
 	$Body.rotation.y += rot
