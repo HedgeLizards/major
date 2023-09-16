@@ -244,6 +244,7 @@ pivot_offset = Vector2(100, 100)
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
+action_mode = 0
 shortcut = SubResource("Shortcut_73dm8")
 shortcut_feedback = false
 text = "BUILD"

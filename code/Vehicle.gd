@@ -124,6 +124,9 @@ func move_placeholder(mouse_position):
 		$Body/Placeholder.position.z = hovered_row - core_row
 
 func disable_placeholder():
+	if placing == null:
+		return
+	
 	$Body/Placeholder.queue_free()
 	
 	placing = null
@@ -136,7 +139,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		move_placeholder(event.position)
 	elif event is InputEventMouseButton:
-		if event.button_index != MOUSE_BUTTON_LEFT || !event.pressed || hovered_row == null:
+		if event.button_index != MOUSE_BUTTON_LEFT || event.pressed || hovered_row == null:
 			return
 		
 		var component = [
@@ -157,7 +160,7 @@ func _unhandled_input(event):
 		
 		disable_placeholder()
 	elif event is InputEventKey:
-		if event.keycode == KEY_ESCAPE && placing != null:
+		if event.keycode == KEY_ESCAPE:
 			disable_placeholder()
 
 func _notification(what):
@@ -166,13 +169,12 @@ func _notification(what):
 
 func _physics_process(delta: float):
 	var inp: Vector2 = input.inp
-	if inp.x != 0:
-		move_placeholder(get_viewport().get_mouse_position())
 	var rot := rotation_speed * inp.x * delta
 	var speed := forward_speed * inp.y * delta
 	$Body.rotation.y += rot
+	if rot != 0:
+		move_placeholder(get_viewport().get_mouse_position())
 	var vel := Vector2(0, speed).rotated($Body.rotation.y)
 	position.x -= vel.x
 	position.z += vel.y
 	$/root/Multiplayer/World/World/Environment.dig(Vector2(global_position.x, global_position.z))
-
