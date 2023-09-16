@@ -168,13 +168,12 @@ func _notification(what):
 		move_placeholder(get_viewport().get_mouse_position())
 
 func _physics_process(delta: float):
-	var inp: Vector2 = input.inp
-	var rot := rotation_speed * inp.x * delta
-	var speed := forward_speed * inp.y * delta
+	var rot: float = -rotation_speed * input.rot * delta
+	var speed: float = -forward_speed * input.speed * delta
 	$Body.rotation.y += rot
 	if rot != 0:
 		move_placeholder(get_viewport().get_mouse_position())
 	var vel := Vector2(0, speed).rotated($Body.rotation.y)
 	position.x -= vel.x
 	position.z += vel.y
-	$/root/Multiplayer/World/World/Environment.dig(Vector2(global_position.x, global_position.z))
+	$/root/Multiplayer/World/World/Environment.dig($Body.global_position)

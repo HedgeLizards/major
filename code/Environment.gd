@@ -29,8 +29,9 @@ func mesh_for(tile: Tile):
 func dig_tile(p: Vector2i) -> void:
 	map[p] = Tile.Open
 
-func dig(v: Vector2) -> void:
-	var p: Vector2i = v.floor()
+func dig(v: Vector3) -> void:
+	var lv := to_local(v)
+	var p := Vector2(lv.x, lv.z)
 	dig_tile(p)
 	view(p)
 
