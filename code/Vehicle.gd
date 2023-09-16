@@ -55,6 +55,14 @@ func _ready():
 			
 			grid[r][c] = free
 
+func toggle_frees(visible):
+	var tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
+	
+	for r in grid.size():
+		for c in grid[0].size():
+			if grid[r][c] != null && grid[r][c].available:
+				tween.tween_property(grid[r][c].get_surface_override_material(0), 'albedo_color:a', 0.5 if visible else 0.0, 0.4)
+
 func enable_placeholder(index):
 	placing = index
 	
@@ -66,6 +74,8 @@ func enable_placeholder(index):
 		Color.GRAY,
 		Color.BLACK,
 	][placing]
+	
+	toggle_frees(true)
 
 func move_placeholder(mouse_position):
 	if placing == null:
@@ -99,6 +109,15 @@ func move_placeholder(mouse_position):
 		$Body/Placeholder.position.x = hovered_column - core_column
 		$Body/Placeholder.position.z = hovered_row - core_row
 
+func disable_placeholder():
+	$Body/Placeholder.visible = false
+	
+	placing = null
+	hovered_row = null
+	hovered_column = null
+	
+	toggle_frees(false)
+
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		move_placeholder(event.position)
@@ -119,11 +138,7 @@ func _unhandled_input(event):
 		
 		grid[hovered_row][hovered_column] = component
 		
-		$Body/Placeholder.visible = false
-		
-		placing = null
-		hovered_row = null
-		hovered_column = null
+		disable_placeholder()
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:

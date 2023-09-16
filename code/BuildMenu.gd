@@ -47,3 +47,9 @@ func _on_build_toggled(button_pressed):
 			
 			tween.tween_property(v_box_container, 'offset_right', 0, 0.4)
 			tween.tween_property(v_box_container, 'modulate:a', 0, 0.4)
+		
+		for child in get_parent().get_node('Players').get_children():
+			if child.is_local():
+				child.disable_placeholder()
+				
+				return
