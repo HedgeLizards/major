@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bm0ujyi38s287"]
 
-[ext_resource type="AudioStream" uid="uid://cp7da3upg5exw" path="res://audio/MUS_MAIN.ogg" id="1_t7rhp"]
+[ext_resource type="AudioStream" uid="uid://da2f0n8xle5dh" path="res://audio/MUS_COMBAT.ogg" id="1_5ad8p"]
 
 [node name="Music" type="AudioStreamPlayer"]
-stream = ExtResource("1_t7rhp")
+stream = ExtResource("1_5ad8p")
 autoplay = true
