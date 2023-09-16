@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://byo5lsrymng5k"]
+
+[ext_resource type="Script" path="res://code/bgm.gd" id="1_cl2w6"]
+[ext_resource type="AudioStream" uid="uid://cp7da3upg5exw" path="res://audio/MUS_MAIN.ogg" id="2_k6ji5"]
+[ext_resource type="AudioStream" uid="uid://da2f0n8xle5dh" path="res://audio/MUS_COMBAT.ogg" id="3_p5ol0"]
+
+[node name="BGM" type="Node3D"]
+script = ExtResource("1_cl2w6")
+
+[node name="MAIN" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_k6ji5")
+autoplay = true
+bus = &"Main"
+
+[node name="COMBAT" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_p5ol0")
+autoplay = true
+bus = &"Combat"

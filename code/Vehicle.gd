@@ -1,4 +1,4 @@
-extends Node3D
+extends RigidBody3D
 
 var Free = preload('res://scenes/free.tscn')
 var Drill = preload('res://scenes/drill.tscn')
@@ -206,11 +206,38 @@ func _notification(what):
 
 func _physics_process(delta: float):
 	var rot: float = -rotation_speed * input.rot * delta
-	var speed: float = -forward_speed * input.speed * delta
-	$Body.rotation.y += rot
-	if rot != 0:
-		move_placeholder(get_viewport().get_mouse_position())
-	var vel := Vector2(0, speed).rotated($Body.rotation.y)
-	position.x -= vel.x
-	position.z += vel.y
-	$/root/Multiplayer/World/World/Environment.dig($Body.global_position)
+	# var speed: float = -forward_speed * input.speed * delta
+#	rotation.y += rot
+	# var vel := Vector2(0, speed).rotated(rotation.y)
+	# position.x -= vel.x
+	# position.z += vel.y
+	# $/root/Multiplayer/World/World/Environment.dig($Body.global_position)
+
+	print(AudioServer.get_bus_volume_db(1))
+	print(AudioServer.get_bus_volume_db(2))
+
+	# For testing sound and music, as well as the two functions test_sound() and test_fire().
+	test_sound()
+	test_fire()
+
+
+func _integrate_forces(state):
+	var velocity = Vector2()
+
+	state.angular_velocity = Vector3(0, -input.rot * rotation_speed,0).rotated(Vector3(0, 1, 0), rotation.y)
+#	rotation.y += input.rot * rotation_speed
+
+	state.linear_velocity = Vector3(0, 0, -input.speed * forward_speed).rotated(Vector3(0, 1, 0), rotation.y)
+
+
+	
+func test_sound():
+	var bgm = $BGM;
+	
+	if Input.is_action_just_pressed("sound_swap"):
+		bgm.crossfade_buses(bgm.COMBAT if bgm.current_track == bgm.MAIN else bgm.MAIN, 2)
+		print(bgm.current_track);
+
+func test_fire():
+	if Input.is_action_just_pressed("fire"):
+		$SFX/Fire.play()

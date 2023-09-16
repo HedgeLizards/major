@@ -6,5 +6,5 @@
 [node name="Shield" instance=ExtResource("1_bgpgd")]
 script = ExtResource("1_8jmps")
 
-[node name="Shield2" parent="." index="0"]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+[node name="Core_002" parent="." index="0"]
+transform = Transform3D(0.4356, 0, 0, 0, 0.4356, 0, 0, 0, 0.4356, 2.08165e-12, 2.08165e-12, 2.08165e-12)
