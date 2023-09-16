@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dukdcih3ch01f"]
+[gd_scene load_steps=8 format=3 uid="uid://dukdcih3ch01f"]
 
 [ext_resource type="Script" path="res://code/Vehicle.gd" id="2_ewdcd"]
 [ext_resource type="Script" path="res://code/playerinput.gd" id="3_8kft6"]
 [ext_resource type="PackedScene" uid="uid://bs0x170nmf570" path="res://scenes/core.tscn" id="3_ac747"]
 [ext_resource type="PackedScene" uid="uid://byo5lsrymng5k" path="res://scenes/bgm.tscn" id="4_m7n3s"]
+[ext_resource type="PackedScene" uid="uid://faxdrvsdtivq" path="res://scenes/sfx.tscn" id="5_f8oks"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34npo"]
 properties/0/path = NodePath(".:position")
@@ -50,3 +51,5 @@ replication_config = SubResource("SceneReplicationConfig_db0ja")
 script = ExtResource("3_8kft6")
 
 [node name="BGM" parent="." instance=ExtResource("4_m7n3s")]
+
+[node name="SFX" parent="." instance=ExtResource("5_f8oks")]

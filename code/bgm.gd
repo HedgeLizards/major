@@ -13,7 +13,7 @@ func _ready():
 
 func crossfade_buses(to_bus_name, duration):
 	if to_bus_name == current_track:
-		return;
+		return
 	
 	current_track = to_bus_name
 	
@@ -22,7 +22,7 @@ func crossfade_buses(to_bus_name, duration):
 	
 	if tween != null:
 		tween.kill()
-		
+	
 	tween = create_tween().set_parallel()
 	
 	for track in tracks:
@@ -31,4 +31,4 @@ func crossfade_buses(to_bus_name, duration):
 		if track == current_track:
 			tween.tween_method(func(value): AudioServer.set_bus_volume_db(index, value), AudioServer.get_bus_volume_db(index), 0, fadein_duration)
 		else:
-			tween.tween_method(func(value): AudioServer.set_bus_volume_db(index, value), AudioServer.get_bus_volume_db(index), 0, fadein_duration)
+			tween.tween_method(func(value): AudioServer.set_bus_volume_db(index, value), AudioServer.get_bus_volume_db(index), -50.0, fadeout_duration)
