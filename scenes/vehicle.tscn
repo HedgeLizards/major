@@ -1,32 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dukdcih3ch01f"]
+[gd_scene load_steps=6 format=3 uid="uid://dukdcih3ch01f"]
 
-[ext_resource type="Texture2D" uid="uid://0sr0a0kr4dta" path="res://icon.svg" id="1_fsdsb"]
 [ext_resource type="Script" path="res://code/Vehicle.gd" id="2_ewdcd"]
+[ext_resource type="PackedScene" uid="uid://c3bkqnsp2ha6r" path="res://scenes/engine.tscn" id="2_qp2py"]
 [ext_resource type="Script" path="res://code/playerinput.gd" id="3_8kft6"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_jw625"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7shco"]
-albedo_texture = ExtResource("1_fsdsb")
-
-[sub_resource type="BoxMesh" id="BoxMesh_ga8bv"]
-size = Vector3(0.9, 0.2, 0.9)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jcd57"]
-transparency = 1
-albedo_color = Color(0, 0.501961, 1, 0.501961)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xa04"]
-transparency = 1
-albedo_color = Color(0, 0.501961, 1, 0.501961)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohfkx"]
-transparency = 1
-albedo_color = Color(0, 0.501961, 1, 0.501961)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_044sg"]
-transparency = 1
-albedo_color = Color(0, 0.501961, 1, 0.501961)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34npo"]
 properties/0/path = NodePath(".:position")
@@ -52,42 +28,17 @@ properties/0/watch = false
 script = ExtResource("2_ewdcd")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.991014, 0.0303444, -0.130274, 0.103771, 0.440125, 0.89192, 0.0844015, -0.897424, 0.433021, -1.308, 10, 4.083)
+transform = Transform3D(1, -6.50845e-16, 1.74393e-16, 1.74393e-16, 0.5, 0.866025, -6.50845e-16, -0.866026, 0.5, 2.08165e-12, 8, 4.083)
+projection = 1
+size = 20.0
 
 [node name="Body" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+[node name="Engine" parent="Body" instance=ExtResource("2_qp2py")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_jw625")
-surface_material_override/0 = SubResource("StandardMaterial3D_7shco")
-
-[node name="Cell1" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.1, -0.5)
-mesh = SubResource("BoxMesh_ga8bv")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_jcd57")
-
-[node name="Cell2" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.1, -0.5)
-mesh = SubResource("BoxMesh_ga8bv")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_6xa04")
-
-[node name="Cell3" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.1, 0.5)
-mesh = SubResource("BoxMesh_ga8bv")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_ohfkx")
-
-[node name="Cell4" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.1, 0.5)
-mesh = SubResource("BoxMesh_ga8bv")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_044sg")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-shadow_enabled = true
 omni_range = 15.0
 omni_attenuation = 0.120742
 

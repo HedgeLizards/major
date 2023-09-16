@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6eg277q0xoij"]
+
+[ext_resource type="PackedScene" uid="uid://ca76pu2akk6i6" path="res://models/Pebbles.glb" id="1_sx8re"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukh2d"]
+albedo_color = Color(0.478431, 0.207843, 0.0901961, 1)
+
+[node name="Pebbles" instance=ExtResource("1_sx8re")]
+
+[node name="Icosphere_001" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_003" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_004" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_005" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_006" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_008" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_009" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_010" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_011" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_012" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_013" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_015" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_016" parent="." index="12"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere" parent="." index="13"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")
+
+[node name="Icosphere_007" parent="." index="14"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ukh2d")

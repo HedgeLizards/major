@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://2irnh6o5hk08"]
+[gd_scene load_steps=9 format=3 uid="uid://2irnh6o5hk08"]
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_kh57m"]
+[ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
+[ext_resource type="PackedScene" uid="uid://c6eg277q0xoij" path="res://scenes/pebbles.tscn" id="3_eww8l"]
 
 [sub_resource type="Environment" id="Environment_jg4cu"]
 ambient_light_source = 2
@@ -39,3 +41,8 @@ mesh = SubResource("CylinderMesh_pcac1")
 _spawnable_scenes = PackedStringArray("res://scenes/vehicle.tscn")
 spawn_path = NodePath("../Players")
 spawn_limit = 4
+
+[node name="BuildMenu" parent="." instance=ExtResource("2_8cdw3")]
+
+[node name="Pebbles" parent="." instance=ExtResource("3_eww8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000203848, 0, -2.81323)
