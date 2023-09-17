@@ -43,21 +43,25 @@ func _ready():
 func create_frees():
 	var near_solid = {} # use as Set
 	var near_power = {}
-	for p in components:
-		if components[p].solid:
-			near_solid[p + Vector2i(0, 1)] = true
-			near_solid[p + Vector2i(0, -1)] = true
-			near_solid[p + Vector2i(1, 0)] = true
-			near_solid[p + Vector2i(-1, 0)] = true
-		if components[p].powered:
-			near_power[p + Vector2i(0, 1)] = true
-			near_power[p + Vector2i(0, -1)] = true
-			near_power[p + Vector2i(1, 0)] = true
-			near_power[p + Vector2i(-1, 0)] = true
-			near_power[p + Vector2i(1, 1)] = true
-			near_power[p + Vector2i(1, -1)] = true
-			near_power[p + Vector2i(-1, 1)] = true
-			near_power[p + Vector2i(-1, -1)] = true
+	for p in components.keys():
+		if components[p].index == -1:
+			components[p].queue_free()
+			components.erase(p)
+		else:
+			if components[p].solid:
+				near_solid[p + Vector2i(0, 1)] = true
+				near_solid[p + Vector2i(0, -1)] = true
+				near_solid[p + Vector2i(1, 0)] = true
+				near_solid[p + Vector2i(-1, 0)] = true
+			if components[p].powered:
+				near_power[p + Vector2i(0, 1)] = true
+				near_power[p + Vector2i(0, -1)] = true
+				near_power[p + Vector2i(1, 0)] = true
+				near_power[p + Vector2i(-1, 0)] = true
+				near_power[p + Vector2i(1, 1)] = true
+				near_power[p + Vector2i(1, -1)] = true
+				near_power[p + Vector2i(-1, 1)] = true
+				near_power[p + Vector2i(-1, -1)] = true
 	for p in near_power:
 		if near_solid.has(p) and !components.has(p):
 			create_free_at(p)
@@ -185,8 +189,9 @@ func _unhandled_input(event):
 				return
 			
 			var module = components[hovered_point]
-			
-			create_free_at(hovered_point)
+
+			components.erase(hovered_point)
+			create_frees()
 			
 			enable_placeholder(module.index, module.rotation.y)
 			
