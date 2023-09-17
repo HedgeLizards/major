@@ -4,6 +4,7 @@
 resource_name = "Reverb"
 predelay_msec = 20.0
 room_size = 0.2
+wet = 0.1
 
 [resource]
 bus/1/name = &"Main"

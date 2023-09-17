@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://faxdrvsdtivq"]
 
 [ext_resource type="Script" path="res://code/sfx.gd" id="1_3crpc"]
-[ext_resource type="AudioStream" uid="uid://bf4mn555wehm5" path="res://audio/SND_SHOT.wav" id="1_j4yv0"]
+[ext_resource type="AudioStream" uid="uid://6xw0fqt0mqur" path="res://audio/SND_SHOT.wav" id="1_j4yv0"]
 [ext_resource type="AudioStream" uid="uid://bkko4kffno7of" path="res://audio/SND_DRILL_LOOP.ogg" id="3_b8tal"]
 [ext_resource type="AudioStream" uid="uid://cvntdmddloapc" path="res://audio/SND_MODULE_GRAB.wav" id="4_kq6ta"]
 [ext_resource type="AudioStream" uid="uid://vsgjdte8qhwn" path="res://audio/SND_COLLECT_ORE.wav" id="4_kwud6"]
