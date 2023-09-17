@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs0x170nmf570"]
+[gd_scene load_steps=6 format=3 uid="uid://bs0x170nmf570"]
 
 [ext_resource type="PackedScene" uid="uid://cnb7hyfsd3201" path="res://models/Modules/Core.gltf" id="1_0gxdk"]
 [ext_resource type="Material" uid="uid://bs7oyubpg4k2c" path="res://models/Textures/texMetal.tres" id="2_0vg0u"]
 [ext_resource type="Material" uid="uid://ba4qcrer4ax86" path="res://models/Textures/texInterior.tres" id="3_pcgur"]
+[ext_resource type="Material" uid="uid://c1057mhmph67w" path="res://models/Textures/texLights.tres" id="3_sepud"]
 [ext_resource type="Material" uid="uid://dwmwtsmg4hhy5" path="res://models/Textures/texPlayer.tres" id="4_udw6y"]
 
 [node name="CoreMesh" instance=ExtResource("1_0gxdk")]
@@ -11,6 +12,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 
 [node name="Cube_002" parent="." index="0"]
 transform = Transform3D(0.323515, 0, 0, 0, 0.462164, 0, 0, 0, 0.452921, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 surface_material_override/0 = ExtResource("2_0vg0u")
+surface_material_override/1 = ExtResource("3_sepud")
 surface_material_override/2 = ExtResource("3_pcgur")
 surface_material_override/3 = ExtResource("3_pcgur")
 surface_material_override/4 = ExtResource("4_udw6y")

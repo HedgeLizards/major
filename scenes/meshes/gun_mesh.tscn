@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cph0xkn0a38ev"]
 
 [ext_resource type="PackedScene" uid="uid://cj125pbco74bh" path="res://models/Modules/Gun.gltf" id="1_jelu0"]
-[ext_resource type="Material" uid="uid://ceekaa5h6a33v" path="res://models/Textures/texIron.tres" id="2_0pj1m"]
+[ext_resource type="Material" uid="uid://ba4qcrer4ax86" path="res://models/Textures/texInterior.tres" id="2_dusom"]
 [ext_resource type="Material" uid="uid://bs7oyubpg4k2c" path="res://models/Textures/texMetal.tres" id="2_wp4f0"]
 [ext_resource type="Material" uid="uid://b5yp2vx3j3cnh" path="res://models/Textures/texTracks.tres" id="4_dmi2f"]
 
@@ -10,6 +10,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 
 
 [node name="Gun2" parent="." index="0"]
 transform = Transform3D(0.9801, 0, 0, 0, 0.81, 0, 8.10074e-16, 0, 0.972, 0, 0, 0)
-surface_material_override/0 = ExtResource("2_0pj1m")
+surface_material_override/0 = ExtResource("2_dusom")
 surface_material_override/1 = ExtResource("2_wp4f0")
 surface_material_override/2 = ExtResource("4_dmi2f")
