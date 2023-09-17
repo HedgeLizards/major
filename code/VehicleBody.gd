@@ -109,7 +109,7 @@ func move_placeholder(mouse_position):
 		hovered_row = null
 		hovered_column = null
 	else:
-		intersection_point = (intersection_point - position).rotated(Vector3.UP, -rotation.y)
+		intersection_point = to_local(intersection_point)
 		
 		hovered_row = floor(intersection_point.z + 0.5) + core_row
 		hovered_column = floor(intersection_point.x + 0.5) + core_column

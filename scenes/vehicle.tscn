@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://dukdcih3ch01f"]
+[gd_scene load_steps=14 format=3 uid="uid://dukdcih3ch01f"]
 
+[ext_resource type="Script" path="res://code/CameraHolder.gd" id="2_1xql6"]
 [ext_resource type="PackedScene" uid="uid://d11d26auk6is0" path="res://scenes/meshes/head_mesh.tscn" id="2_2ftb2"]
 [ext_resource type="Script" path="res://code/Vehicle.gd" id="2_ewdcd"]
 [ext_resource type="Script" path="res://code/VehicleBody.gd" id="2_wlens"]
@@ -67,12 +68,16 @@ properties/2/watch = false
 [node name="Vehicle" type="Node3D"]
 script = ExtResource("2_ewdcd")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="CameraHolder" type="Node3D" parent="."]
+script = ExtResource("2_1xql6")
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder"]
 unique_name_in_owner = true
-transform = Transform3D(1, -6.50845e-16, 1.74393e-16, 1.74393e-16, 0.5, 0.866025, -6.50845e-16, -0.866026, 0.5, 2.08165e-12, 8, 4.083)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 7.01491, 3.27943)
 size = 20.0
 
 [node name="Body" type="RigidBody3D" parent="."]
+unique_name_in_owner = true
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
