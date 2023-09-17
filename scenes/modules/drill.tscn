@@ -4,12 +4,12 @@
 [ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_jr5t1"]
 [ext_resource type="Script" path="res://code/Drill.gd" id="1_pyajo"]
 [ext_resource type="AnimationLibrary" uid="uid://bp76puhi8rpa6" path="res://Animations/Anims.res" id="3_2f5oi"]
-[ext_resource type="Material" uid="uid://4uhl00cfq71s" path="res://models/Textures/texRock.tres" id="5_6v5sj"]
+[ext_resource type="Material" uid="uid://b1ofjqa7sx87k" path="res://models/Textures/texFloor.tres" id="5_j2vtg"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lvw7s"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_lf5n6"]
-material = ExtResource("5_6v5sj")
+material = ExtResource("5_j2vtg")
 size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="Curve" id="Curve_rwfdi"]
@@ -37,13 +37,13 @@ libraries = {
 }
 
 [node name="DigCenter" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.20799)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.737562)
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.010107, -0.510277)
-visible = false
 amount = 80
-lifetime = 0.7
+lifetime = 0.5
+local_coords = true
 mesh = SubResource("PrismMesh_lf5n6")
 emission_shape = 3
 emission_box_extents = Vector3(0.5, 0.1, 0.5)

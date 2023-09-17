@@ -19,6 +19,7 @@ var hovered_point:
 			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_POINTING_HAND)
 		else:
 			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW if hovered_point == null else DisplayServer.CURSOR_POINTING_HAND)
+var existing_point
 var grabbed_position
 var lock_pointing_hand = false
 
@@ -48,10 +49,10 @@ func _ready():
 func create_frees():
 	var near_solid = {} # use as Set
 	var near_power = {}
+	var free_points = []
 	for p in modules.keys():
 		if modules[p].index == -1:
-			modules[p].queue_free()
-			modules.erase(p)
+			free_points.push_back(p)
 		else:
 			if modules[p].solid:
 				near_solid[p + Vector2i(0, 1)] = true
@@ -68,8 +69,14 @@ func create_frees():
 				near_power[p + Vector2i(-1, 1)] = true
 				near_power[p + Vector2i(-1, -1)] = true
 	for p in near_power:
-		if near_solid.has(p) and !modules.has(p):
-			create_free_at(p)
+		if near_solid.has(p):
+			if free_points.has(p):
+				free_points.erase(p)
+			elif !modules.has(p):
+				create_free_at(p)
+	for p in free_points:
+		modules[p].queue_free()
+		modules.erase(p)
 
 func create_free_at(p: Vector2i):
 	var free = Free.instantiate()
@@ -84,10 +91,12 @@ func create_free_at(p: Vector2i):
 	
 
 func toggle_frees():
-	var tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
+	var tween
 	for p in modules:
 		var module = modules[p]
 		if module.index == -1:
+			if tween == null:
+				tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
 			tween.tween_property(module.get_surface_override_material(0), 'albedo_color:a', 0.0 if placing == null else 0.5, 0.2)
 
 func enable_building():
@@ -125,12 +134,14 @@ func enable_placeholder(index, rotation_y = 0):
 	toggle_frees()
 	
 	raycast_grid(get_viewport().get_mouse_position())
+	
+	existing_point = null
 
 func raycast_grid(mouse_position):
 	if !building:
 		return
 	
-	var intersection_point = Plane.PLANE_XZ.intersects_ray(
+	var intersection_point = Plane(0, 1, 0, 0.2).intersects_ray(
 		camera.project_ray_origin(mouse_position),
 		camera.project_ray_normal(mouse_position)
 	)
@@ -143,7 +154,7 @@ func raycast_grid(mouse_position):
 		hovered_point = Vector2i(floor(intersection_point.x + 0.5), floor(intersection_point.z + 0.5))
 		if !modules.has(hovered_point) || \
 			(placing == null && modules[hovered_point].index < 0) || \
-			(placing != null && modules[hovered_point].index != -1):
+			(placing != null && (modules[hovered_point].index != -1 || !is_module_valid(placing, hovered_point, true))):
 			hovered_point = null
 	
 	if placing == null:
@@ -178,11 +189,13 @@ func disable_placeholder():
 	hovered_point = null
 	
 	toggle_frees()
+	
+	raycast_grid(get_viewport().get_mouse_position())
 
 func disable_building():
-	disable_placeholder()
-	
 	building = false
+	
+	disable_placeholder()
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -202,6 +215,7 @@ func _unhandled_input(event):
 			
 			enable_placeholder(module.index, module.rotation.y)
 			
+			existing_point = hovered_point
 			grabbed_position = event.position
 		else:
 			if event.pressed || event.position == grabbed_position:
@@ -213,7 +227,10 @@ func _unhandled_input(event):
 			
 			add_module.rpc(placing, hovered_point, $Placeholder.rotation.y + PI / 2)
 			
-			toggle_frees() # disable_placeholder() instead if moving existing module or not enough resources left
+			if existing_point == null: # or not enough resources left
+				toggle_frees()
+			else:
+				disable_placeholder()
 	elif event is InputEventKey:
 		if event.echo || !event.pressed:
 			return
@@ -226,10 +243,59 @@ func _unhandled_input(event):
 				get_node('../SFX/Module Rotate').play()
 				
 				$Placeholder.rotation.y += (PI if event.shift_pressed else -PI) / 2
+				
+				raycast_grid(get_viewport().get_mouse_position())
 			KEY_BACKSPACE, KEY_DELETE:
 				disable_placeholder()
 			KEY_ESCAPE:
-				disable_placeholder()
+				disable_placeholder() # instead revert if existing point
+
+func is_module_valid(index, point, new):
+	var offsets = [Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0), Vector2i(0, 1)]
+	
+	if index == 0 || index == 3:
+		offsets = [offsets[roundi(fposmod(($Placeholder.rotation.y if new else modules[point].rotation.y - PI / 2), TAU) / (PI / 2)) % 4]]
+	elif new:
+		return true
+	
+	var near_solid = false
+	
+	for offset in offsets:
+		var neighbour = point + offset
+		
+		if modules.has(neighbour) && modules[neighbour].solid:
+			near_solid = true
+			
+			break
+	
+	if near_solid:
+		for offset in [
+			Vector2i(-1, -1),
+			Vector2i(0, -1),
+			Vector2i(1, -1),
+			Vector2i(-1, 0),
+			Vector2i(1, 0),
+			Vector2i(-1, 1),
+			Vector2i(0, 1),
+			Vector2i(1, 1),
+		]:
+			var neighbour = point + offset
+			
+			if modules.has(neighbour) && modules[neighbour].powered:
+				return true
+	
+	return false
+
+func are_all_modules_valid():
+	for p in modules:
+		var module = modules[p]
+		
+		if module.index >= 0 && !is_module_valid(module.index, p, false):
+			return false
+	
+	# dfs_from_core with reachable_from_core
+	
+	return true
 
 @rpc("any_peer", "call_local", "reliable")
 func add_module(placing: int, point: Vector2i, rot: float):
@@ -241,15 +307,36 @@ func add_module(placing: int, point: Vector2i, rot: float):
 		Shield,
 		Mine,
 	][placing].instantiate()
-
-	module.position.x = point.x
-	module.position.z = point.y
-	module.rotation.y = rot
-	add_child(module)
-	if modules.has(point):
-		modules[point].queue_free()
+	
+	var free = modules[point]
+	
 	modules[point] = module
-	create_frees()
+	
+	module.rotation.y = rot
+	
+	if are_all_modules_valid():
+		free.queue_free()
+		
+		module.position.x = point.x
+		module.position.z = point.y
+		
+		add_child(module)
+		
+		create_frees()
+	elif existing_point == null:
+		module.queue_free()
+		
+		modules[point] = free
+	else:
+		modules[point] = free
+		
+		module.position.x = existing_point.x
+		module.position.z = existing_point.y
+		
+		add_child(module)
+		
+		modules[existing_point].queue_free()
+		modules[existing_point] = module
 
 @rpc("any_peer", "call_local", "reliable")
 func remove_module(point: Vector2i):
