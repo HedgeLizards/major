@@ -21,6 +21,7 @@ func grid_index_for(tile: Tile) -> int:
 func dig_tile(p: Vector2i) -> void:
 	map[p] = Tile.Open
 
+@rpc("any_peer", "call_local", "reliable")
 func dig(v: Vector3) -> void:
 	var lv := to_local(v).floor()
 	var p := Vector2(lv.x, lv.z)
