@@ -64,7 +64,9 @@ _spawnable_scenes = PackedStringArray("res://scenes/vehicle.tscn")
 spawn_path = NodePath("../Players")
 spawn_limit = 4
 
-[node name="BuildMenu" parent="." instance=ExtResource("2_8cdw3")]
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="BuildMenu" parent="UserInterface" instance=ExtResource("2_8cdw3")]
 
 [node name="Pebbles" parent="." instance=ExtResource("3_eww8l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000203848, 0, -2.81323)

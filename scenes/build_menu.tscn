@@ -10,18 +10,28 @@ unicode = 98
 [sub_resource type="Shortcut" id="Shortcut_73dm8"]
 events = [SubResource("InputEventKey_0qw6u")]
 
-[node name="BuildMenu" type="CanvasLayer"]
-script = ExtResource("1_acqg8")
-
-[node name="VBoxContainer1" type="VBoxContainer" parent="."]
-modulate = Color(1, 1, 1, 0)
+[node name="BuildMenu" type="Control"]
+layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 1
+script = ExtResource("1_acqg8")
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
@@ -51,13 +61,14 @@ text = "DRILL"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -100.0
+offset_top = -100.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
@@ -87,13 +98,14 @@ text = "BATTERY"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -100.0
+offset_top = -100.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
@@ -123,13 +135,14 @@ text = "WHEEL"
 
 [node name="VBoxContainer4" type="VBoxContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -100.0
+offset_top = -100.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
@@ -159,6 +172,7 @@ text = "GUN"
 
 [node name="VBoxContainer5" type="VBoxContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -195,6 +209,7 @@ text = "SHIELD"
 
 [node name="VBoxContainer6" type="VBoxContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -231,6 +246,7 @@ text = "MINE"
 
 [node name="Build" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

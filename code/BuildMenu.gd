@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 var screen_scale = DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
 
@@ -7,7 +7,7 @@ func _ready():
 		child.scale *= screen_scale
 
 func enable_placeholder(index):
-	for child in get_parent().get_node('Players').get_children():
+	for child in get_node('../../Players').get_children():
 		if child.is_local():
 			child.enable_placeholder(index)
 			
@@ -44,7 +44,7 @@ func _on_build_toggled(button_pressed):
 			tween.tween_property(v_box_container, 'offset_right', (number_of_v_box_containers - i) * -100 * screen_scale, 0.4)
 			tween.tween_property(v_box_container, 'modulate:a', 1, 0.4)
 		
-		for child in get_parent().get_node('Players').get_children():
+		for child in get_node('../../Players').get_children():
 			if child.is_local():
 				child.enable_building()
 				
@@ -58,7 +58,7 @@ func _on_build_toggled(button_pressed):
 			tween.tween_property(v_box_container, 'offset_right', 0, 0.4)
 			tween.tween_property(v_box_container, 'modulate:a', 0, 0.4)
 		
-		for child in get_parent().get_node('Players').get_children():
+		for child in get_node('../../Players').get_children():
 			if child.is_local():
 				child.disable_building()
 				
