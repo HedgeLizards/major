@@ -78,6 +78,7 @@ script = ExtResource("2_1xql6")
 [node name="Camera3D" type="Camera3D" parent="CameraHolder"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 7.01491, 3.27943)
+projection = 1
 size = 15.0
 
 [node name="Body" type="RigidBody3D" parent="."]
