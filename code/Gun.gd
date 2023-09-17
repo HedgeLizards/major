@@ -1,3 +1,3 @@
 extends Node3D
 
-var available = false
+var index = 3

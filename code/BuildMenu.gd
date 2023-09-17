@@ -43,6 +43,12 @@ func _on_build_toggled(button_pressed):
 			
 			tween.tween_property(v_box_container, 'offset_right', (number_of_v_box_containers - i) * -100 * screen_scale, 0.4)
 			tween.tween_property(v_box_container, 'modulate:a', 1, 0.4)
+		
+		for child in get_parent().get_node('Players').get_children():
+			if child.is_local():
+				child.enable_building()
+				
+				return
 	else:
 		$Build.mouse_filter = Control.MOUSE_FILTER_STOP
 		
@@ -54,6 +60,6 @@ func _on_build_toggled(button_pressed):
 		
 		for child in get_parent().get_node('Players').get_children():
 			if child.is_local():
-				child.disable_placeholder()
+				child.disable_building()
 				
 				return

@@ -11,8 +11,13 @@ var invalid = preload('res://resources/invalid.tres')
 
 var core_row = 1
 var core_column = 1
+var building = false
 var placing
-var hovered_row
+var hovered_row:
+	set(value):
+		hovered_row = value
+		
+		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW if hovered_row == null else DisplayServer.CURSOR_POINTING_HAND)
 var hovered_column
 
 var forward_speed := 5
@@ -45,31 +50,37 @@ func _ready():
 func create_frees():
 	for r in grid.size():
 		for c in grid[0].size():
-			if grid[r][c] != null || (
-				(r == 0 || grid[r - 1][c] == null || grid[r - 1][c].available) && \
-				(r == grid.size() - 1 || grid[r + 1][c] == null || grid[r + 1][c].available) && \
-				(c == 0 || grid[r][c - 1] == null || grid[r][c - 1].available) && \
-				(c == grid[0].size() - 1 || grid[r][c + 1] == null || grid[r][c + 1].available)
+			if grid[r][c] == null && (
+				(r > 0 && grid[r - 1][c] != null && grid[r - 1][c].index != -1) || \
+				(r < grid.size() - 1 && grid[r + 1][c] != null && grid[r + 1][c].index != -1) || \
+				(c > 0 && grid[r][c - 1] != null && grid[r][c - 1].index != -1) || \
+				(c < grid[0].size() - 1 && grid[r][c + 1] != null && grid[r][c + 1].index != -1)
 			):
-				continue
-			
-			var free = Free.instantiate()
-			
-			free.position.x = c - core_column
-			free.position.y = -0.4
-			free.position.z = r - core_row
-			
-			add_child(free)
-			
-			grid[r][c] = free
+				create_free_at(r, c)
+
+func create_free_at(row, column):
+	var free = Free.instantiate()
+	
+	free.position.x = column - core_column
+	free.position.y = -0.4
+	free.position.z = row - core_row
+	
+	add_child(free)
+	
+	grid[row][column] = free
 
 func toggle_frees():
 	var tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
 	
 	for r in grid.size():
 		for c in grid[0].size():
-			if grid[r][c] != null && grid[r][c].available:
+			if grid[r][c] != null && grid[r][c].index == -1:
 				tween.tween_property(grid[r][c].get_surface_override_material(0), 'albedo_color:a', 0.0 if placing == null else 0.5, 0.2)
+
+func enable_building():
+	building = true
+	
+	raycast_grid(get_viewport().get_mouse_position())
 
 func enable_placeholder(index):
 	if placing != null:
@@ -94,10 +105,10 @@ func enable_placeholder(index):
 	
 	toggle_frees()
 	
-	move_placeholder(get_viewport().get_mouse_position())
+	raycast_grid(get_viewport().get_mouse_position())
 
-func move_placeholder(mouse_position):
-	if placing == null:
+func raycast_grid(mouse_position):
+	if !building:
 		return
 	
 	var intersection_point = Plane.PLANE_XZ.intersects_ray(
@@ -116,9 +127,14 @@ func move_placeholder(mouse_position):
 		
 		if hovered_row < 0 || hovered_row >= grid.size() || \
 			hovered_column < 0 || hovered_column >= grid[0].size() || \
-			grid[hovered_row][hovered_column] == null || !grid[hovered_row][hovered_column].available:
+			grid[hovered_row][hovered_column] == null || \
+			(placing == null && grid[hovered_row][hovered_column].index < 0) || \
+			(placing != null && grid[hovered_row][hovered_column].index != -1):
 			hovered_row = null
 			hovered_column = null
+	
+	if placing == null:
+		return
 	
 	if hovered_row == null:
 		$Placeholder.get_child(0).set_surface_override_material(0, invalid)
@@ -143,70 +159,84 @@ func disable_placeholder():
 	
 	toggle_frees()
 
+func disable_building():
+	disable_placeholder()
+	
+	building = false
+
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
-		move_placeholder(event.position)
+		raycast_grid(event.position)
 	elif event is InputEventMouseButton:
 		if event.button_index != MOUSE_BUTTON_LEFT || event.pressed || hovered_row == null:
 			return
 		
-		var module = [
-			Drill,
-			Battery,
-			Wheel,
-			Gun,
-			Shield,
-			Mine,
-		][placing].instantiate()
-		
-		module.position.x = hovered_column - core_column
-		module.position.z = hovered_row - core_row
-		
-		add_child(module)
-		
-		grid[hovered_row][hovered_column].queue_free()
-		grid[hovered_row][hovered_column] = module
-		
-		if hovered_row == 0:
-			core_row += 1
+		if placing == null:
+			var module = grid[hovered_row][hovered_column]
 			
-			var row = []
+			create_free_at(hovered_row, hovered_column)
 			
-			row.resize(grid[0].size())
+			enable_placeholder(module.index)
 			
-			grid.push_front(row)
-		
-		if hovered_row == grid.size() - 1:
-			var row = []
+			module.queue_free()
+		else:
+			var module = [
+				Drill,
+				Battery,
+				Wheel,
+				Gun,
+				Shield,
+				Mine,
+			][placing].instantiate()
 			
-			row.resize(grid[0].size())
+			module.position.x = hovered_column - core_column
+			module.position.z = hovered_row - core_row
 			
-			grid.push_back(row)
-		
-		if hovered_column == 0:
-			core_column += 1
+			add_child(module)
 			
-			for row in grid:
-				row.push_front(null)
-		
-		if hovered_column == grid[0].size() - 1:
-			for row in grid:
-				row.push_back(null)
-		
-		create_frees()
-		
-		toggle_frees() # disable_placeholder() instead if not enough resources left
+			grid[hovered_row][hovered_column].queue_free()
+			grid[hovered_row][hovered_column] = module
+			
+			if hovered_row == 0:
+				core_row += 1
+				
+				var row = []
+				
+				row.resize(grid[0].size())
+				
+				grid.push_front(row)
+			
+			if hovered_row == grid.size() - 1:
+				var row = []
+				
+				row.resize(grid[0].size())
+				
+				grid.push_back(row)
+			
+			if hovered_column == 0:
+				core_column += 1
+				
+				for row in grid:
+					row.push_front(null)
+			
+			if hovered_column == grid[0].size() - 1:
+				for row in grid:
+					row.push_back(null)
+			
+			create_frees()
+			
+			toggle_frees() # disable_placeholder() instead if moving existing module or not enough resources left
 	elif event is InputEventKey:
 		if event.keycode == KEY_ESCAPE:
 			disable_placeholder()
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
-		move_placeholder(get_viewport().get_mouse_position())
+		raycast_grid(get_viewport().get_mouse_position())
 
 func _physics_process(delta: float):
 	if input.rot != 0:
-		move_placeholder(get_viewport().get_mouse_position())
+		raycast_grid(get_viewport().get_mouse_position())
 
 
 func _integrate_forces(state):
