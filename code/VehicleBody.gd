@@ -14,8 +14,13 @@ var placing
 var hovered_point:
 	set(value):
 		hovered_point = value
-		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW if hovered_point == null else DisplayServer.CURSOR_POINTING_HAND)
+		
+		if lock_pointing_hand:
+			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_POINTING_HAND)
+		else:
+			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW if hovered_point == null else DisplayServer.CURSOR_POINTING_HAND)
 var grabbed_position
+var lock_pointing_hand = false
 
 var forward_speed := 5
 var rotation_speed := 1.0 * PI
@@ -136,7 +141,9 @@ func raycast_grid(mouse_position):
 		intersection_point = to_local(intersection_point)
 		
 		hovered_point = Vector2i(floor(intersection_point.x + 0.5), floor(intersection_point.z + 0.5))
-		if !components.has(hovered_point) || placing == null && components[hovered_point].index < 0 || placing != null && components[hovered_point].index != -1:
+		if !components.has(hovered_point) || \
+			(placing == null && components[hovered_point].index < 0) || \
+			(placing != null && components[hovered_point].index != -1):
 			hovered_point = null
 	
 	if placing == null:

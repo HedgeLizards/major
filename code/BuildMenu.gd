@@ -21,6 +21,12 @@ func show_labels(index):
 	
 	for i in number_of_labels:
 		v_box_container.get_child(i).visible = true
+	
+	for child in get_node('../../Players').get_children():
+		if child.is_local():
+			child.lock_pointing_hand()
+			
+			return
 
 func hide_labels(index):
 	var v_box_container = get_child(index)
@@ -30,14 +36,18 @@ func hide_labels(index):
 	
 	for i in number_of_labels:
 		v_box_container.get_child(i).visible = false
+	
+	for child in get_node('../../Players').get_children():
+		if child.is_local():
+			child.unlock_pointing_hand()
+			
+			return
 
 func _on_build_toggled(button_pressed):
 	var number_of_v_box_containers = get_child_count() - 1
 	var tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
 	
 	if button_pressed:
-		$Build.mouse_filter = Control.MOUSE_FILTER_PASS
-		
 		for i in number_of_v_box_containers:
 			var v_box_container = get_child(i)
 			
@@ -50,8 +60,6 @@ func _on_build_toggled(button_pressed):
 				
 				return
 	else:
-		$Build.mouse_filter = Control.MOUSE_FILTER_STOP
-		
 		for i in number_of_v_box_containers:
 			var v_box_container = get_child(i)
 			
