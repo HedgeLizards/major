@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://2irnh6o5hk08"]
+[gd_scene load_steps=15 format=3 uid="uid://2irnh6o5hk08"]
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_kh57m"]
 [ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c6eg277q0xoij" path="res://scenes/pebbles.tscn" id="3_eww8l"]
 [ext_resource type="Script" path="res://code/Environment.gd" id="4_c36pg"]
 [ext_resource type="ArrayMesh" uid="uid://nj50x3ekh612" path="res://models/Ground.obj" id="5_nmo1o"]
+[ext_resource type="Script" path="res://code/Creator.gd" id="7_fydrv"]
 
 [sub_resource type="Environment" id="Environment_jg4cu"]
 ambient_light_source = 1
@@ -103,3 +104,6 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.939693, -0.336824, 0.0593912, 0, 0.173648, 0.984808, -0.34202, -0.925417, 0.163176, 0, 3.15199, 0)
 visible = false
+
+[node name="Creator" type="Node3D" parent="." groups=["creators"]]
+script = ExtResource("7_fydrv")

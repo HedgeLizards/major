@@ -54,16 +54,17 @@ func clear_tile(p: Vector2i):
 
 func dig_tile(p: Vector2i, damage: float) -> void:
 	var tile := tile_at(p)
-	if multiplayer.is_server() && tile.typ.destructible():
+	if tile.typ.destructible():
 		tile.health -= damage
 		if tile.health <= 0:
 			clear_tile.rpc(p)
 
-@rpc("any_peer", "call_local", "reliable")
+# @rpc("any_peer", "call_local", "reliable")
 func dig(v: Vector3, damage: float) -> void:
-	var lv := to_local(v).floor()
-	var p := Vector2(lv.x, lv.z)
-	dig_tile(p, damage)
+	if multiplayer.is_server():
+		var lv := to_local(v).floor()
+		var p := Vector2(lv.x, lv.z)
+		dig_tile(p, damage)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
