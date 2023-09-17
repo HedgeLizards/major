@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://2irnh6o5hk08"]
+[gd_scene load_steps=14 format=3 uid="uid://2irnh6o5hk08"]
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_kh57m"]
 [ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
-[ext_resource type="Material" uid="uid://b1ofjqa7sx87k" path="res://models/Textures/texFloor.tres" id="2_xn5t0"]
+[ext_resource type="Material" path="res://models/Textures/texFloor.tres" id="2_xn5t0"]
 [ext_resource type="PackedScene" uid="uid://c6eg277q0xoij" path="res://scenes/pebbles.tscn" id="3_eww8l"]
 [ext_resource type="Script" path="res://code/Environment.gd" id="4_c36pg"]
+[ext_resource type="ArrayMesh" uid="uid://nj50x3ekh612" path="res://models/Ground.obj" id="5_nmo1o"]
 
 [sub_resource type="Environment" id="Environment_jg4cu"]
 ambient_light_source = 1
@@ -45,6 +46,8 @@ _surfaces = [{
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dqxbu"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ol12"]
+
 [sub_resource type="MeshLibrary" id="MeshLibrary_ejjoe"]
 item/0/name = ""
 item/0/mesh = SubResource("ArrayMesh_d2mfh")
@@ -57,6 +60,12 @@ item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/shapes = []
 item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/navigation_layers = 1
+item/2/name = ""
+item/2/mesh = ExtResource("5_nmo1o")
+item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/shapes = [SubResource("BoxShape3D_2ol12"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/navigation_layers = 1
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_kh57m")

@@ -104,8 +104,8 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02681, -0.665223)
 light_energy = 10.0
 shadow_enabled = true
-omni_range = 20.0
-omni_attenuation = 1.23114
+omni_range = 50.0
+omni_attenuation = 0.129408
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_34npo")

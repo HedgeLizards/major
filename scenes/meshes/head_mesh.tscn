@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://clk16uh5nlmkl" path="res://models/Modules/Head.gltf" id="1_0t4an"]
 [ext_resource type="Material" uid="uid://dwmwtsmg4hhy5" path="res://models/Textures/texPlayer.tres" id="2_7357f"]
-[ext_resource type="Material" uid="uid://c1057mhmph67w" path="res://models/Textures/texLights.tres" id="2_yt4fk"]
+[ext_resource type="Material" path="res://models/Textures/texLights.tres" id="2_yt4fk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0t01a"]
 cull_mode = 1
