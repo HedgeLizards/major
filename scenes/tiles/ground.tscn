@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://707w631bmvsb"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_chebq"]
-orientation = 1
-
-[node name="Ground" type="MeshInstance3D"]
-visible = false
-mesh = SubResource("QuadMesh_chebq")

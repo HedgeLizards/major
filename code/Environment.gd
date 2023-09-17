@@ -22,7 +22,7 @@ func dig_tile(p: Vector2i) -> void:
 	map[p] = Tile.Open
 
 func dig(v: Vector3) -> void:
-	var lv := to_local(v)
+	var lv := to_local(v).floor()
 	var p := Vector2(lv.x, lv.z)
 	dig_tile(p)
 	view(p)

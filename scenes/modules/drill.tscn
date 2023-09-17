@@ -5,11 +5,14 @@
 [ext_resource type="Script" path="res://code/Drill.gd" id="1_pyajo"]
 
 [node name="Drill" type="Area3D"]
+collision_layer = 3
+collision_mask = 3
 input_ray_pickable = false
-monitorable = false
 script = ExtResource("1_pyajo")
 
 [node name="DrillMesh" parent="." instance=ExtResource("1_fhb5y")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = ExtResource("1_jr5t1")
+
+[node name="DigCenter" type="Node3D" parent="."]
