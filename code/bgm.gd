@@ -35,8 +35,14 @@ func crossfade_buses(to_bus_name, duration):
 
 func _process(delta):
 	test_music();
+	mute_music();
 
 func test_music():
 	if Input.is_action_just_pressed("sound_swap"):
 		crossfade_buses(COMBAT if current_track == MAIN else MAIN, 2)
 		print(current_track);
+
+func mute_music():
+	if Input.is_action_just_pressed("mute_music"):
+		$MAIN.stop();
+		$COMBAT.stop();
