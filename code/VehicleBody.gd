@@ -26,7 +26,7 @@ var forward_speed := 5
 var rotation_speed := 1.0 * PI
 
 @onready var camera = %Camera3D
-@onready var components = {Vector2i(0, 0): $Core}
+@onready var modules = {Vector2i(0, 0): $Core}
 @onready var input := %PlayerInput
 
 # Set by the authority, synchronized on spawn.
@@ -48,17 +48,17 @@ func _ready():
 func create_frees():
 	var near_solid = {} # use as Set
 	var near_power = {}
-	for p in components.keys():
-		if components[p].index == -1:
-			components[p].queue_free()
-			components.erase(p)
+	for p in modules.keys():
+		if modules[p].index == -1:
+			modules[p].queue_free()
+			modules.erase(p)
 		else:
-			if components[p].solid:
+			if modules[p].solid:
 				near_solid[p + Vector2i(0, 1)] = true
 				near_solid[p + Vector2i(0, -1)] = true
 				near_solid[p + Vector2i(1, 0)] = true
 				near_solid[p + Vector2i(-1, 0)] = true
-			if components[p].powered:
+			if modules[p].powered:
 				near_power[p + Vector2i(0, 1)] = true
 				near_power[p + Vector2i(0, -1)] = true
 				near_power[p + Vector2i(1, 0)] = true
@@ -68,7 +68,7 @@ func create_frees():
 				near_power[p + Vector2i(-1, 1)] = true
 				near_power[p + Vector2i(-1, -1)] = true
 	for p in near_power:
-		if near_solid.has(p) and !components.has(p):
+		if near_solid.has(p) and !modules.has(p):
 			create_free_at(p)
 
 func create_free_at(p: Vector2i):
@@ -80,15 +80,15 @@ func create_free_at(p: Vector2i):
 	
 	add_child(free)
 
-	components[p] = free
+	modules[p] = free
 	
 
 func toggle_frees():
 	var tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
-	for p in components:
-		var component = components[p]
-		if component.index == -1:
-			tween.tween_property(component.get_surface_override_material(0), 'albedo_color:a', 0.0 if placing == null else 0.5, 0.2)
+	for p in modules:
+		var module = modules[p]
+		if module.index == -1:
+			tween.tween_property(module.get_surface_override_material(0), 'albedo_color:a', 0.0 if placing == null else 0.5, 0.2)
 
 func enable_building():
 	building = true
@@ -141,9 +141,9 @@ func raycast_grid(mouse_position):
 		intersection_point = to_local(intersection_point)
 		
 		hovered_point = Vector2i(floor(intersection_point.x + 0.5), floor(intersection_point.z + 0.5))
-		if !components.has(hovered_point) || \
-			(placing == null && components[hovered_point].index < 0) || \
-			(placing != null && components[hovered_point].index != -1):
+		if !modules.has(hovered_point) || \
+			(placing == null && modules[hovered_point].index < 0) || \
+			(placing != null && modules[hovered_point].index != -1):
 			hovered_point = null
 	
 	if placing == null:
@@ -195,7 +195,7 @@ func _unhandled_input(event):
 			if !event.pressed:
 				return
 			
-			var module = components[hovered_point]
+			var module = modules[hovered_point]
 			var point: Vector2i = hovered_point
 			
 			remove_module.rpc(point)
@@ -246,15 +246,15 @@ func add_module(placing: int, point: Vector2i, rot: float):
 	module.position.z = point.y
 	module.rotation.y = rot
 	add_child(module)
-	if components.has(point):
-		components[point].queue_free()
-	components[point] = module
+	if modules.has(point):
+		modules[point].queue_free()
+	modules[point] = module
 	create_frees()
 
 @rpc("any_peer", "call_local", "reliable")
 func remove_module(point: Vector2i):
-	components[point].queue_free()
-	components.erase(point)
+	modules[point].queue_free()
+	modules.erase(point)
 	create_frees()
 
 func _notification(what):
