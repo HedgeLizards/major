@@ -77,9 +77,11 @@ script = ExtResource("2_1xql6")
 
 [node name="Camera3D" type="Camera3D" parent="CameraHolder"]
 unique_name_in_owner = true
-transform = Transform3D(1, -6.76539e-16, 1.19292e-16, 1.19292e-16, 0.34202, 0.939693, -6.76539e-16, -0.939693, 0.34202, 0, 8.19326, 3.27943)
+transform = Transform3D(1, -5.48843e-16, 2.85709e-16, 2.85709e-16, 0.819152, 0.573576, -5.48843e-16, -0.573576, 0.819152, 2.08165e-12, 9.15, 12)
+projection = 1
 fov = 80.0
-size = 15.0
+size = 18.0
+near = 0.001
 
 [node name="Body" type="RigidBody3D" parent="."]
 unique_name_in_owner = true
