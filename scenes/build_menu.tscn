@@ -55,7 +55,6 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
-mouse_default_cursor_shape = 2
 action_mode = 0
 text = "DRILL"
 
@@ -92,7 +91,6 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
-mouse_default_cursor_shape = 2
 action_mode = 0
 text = "BATTERY"
 
@@ -129,7 +127,6 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
-mouse_default_cursor_shape = 2
 action_mode = 0
 text = "WHEEL"
 
@@ -166,7 +163,6 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
-mouse_default_cursor_shape = 2
 action_mode = 0
 text = "GUN"
 
@@ -203,7 +199,6 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
-mouse_default_cursor_shape = 2
 action_mode = 0
 text = "SHIELD"
 
@@ -240,7 +235,6 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
-mouse_default_cursor_shape = 2
 action_mode = 0
 text = "MINE"
 
