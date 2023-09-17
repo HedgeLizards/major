@@ -95,11 +95,6 @@ libraries = {
 
 [node name="Core" parent="Body" instance=ExtResource("3_clmha")]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-omni_range = 15.0
-omni_attenuation = 0.120742
-
 [node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_db0ja")

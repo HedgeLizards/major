@@ -70,3 +70,6 @@ mesh_library = SubResource("MeshLibrary_ejjoe")
 cell_size = Vector3(1, 1, 1)
 script = ExtResource("4_c36pg")
 metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.939693, -0.336824, 0.0593912, 0, 0.173648, 0.984808, -0.34202, -0.925417, 0.163176, 0, 3.15199, 0)
