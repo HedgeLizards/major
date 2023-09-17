@@ -8,8 +8,21 @@
 [ext_resource type="ArrayMesh" uid="uid://nj50x3ekh612" path="res://models/Ground.obj" id="5_nmo1o"]
 
 [sub_resource type="Environment" id="Environment_jg4cu"]
-ambient_light_source = 1
-ambient_light_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 2.5
+tonemap_white = 0.75
+ssao_enabled = true
+ssao_radius = 0.83
+ssao_intensity = 5.28
+ssao_detail = 5.0
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+glow_enabled = true
+glow_bloom = 0.2
+fog_light_color = Color(0.435294, 0.227451, 0.0862745, 1)
+volumetric_fog_density = 0.1
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+adjustment_enabled = true
+adjustment_saturation = 1.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_l287f"]
 size = Vector2(200, 300)
@@ -92,7 +105,7 @@ spawn_limit = 4
 transform = Transform3D(9.51373, 0, 0, 0, 9.51373, 0, 0, 0, 9.51373, -0.000203848, 0, -2.81323)
 
 [node name="Environment" type="GridMap" parent="."]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
+transform = Transform3D(3.1, 0, 0, 0, 1, 0, 0, 0, 3.1, 0, 0, 0)
 mesh_library = SubResource("MeshLibrary_ejjoe")
 cell_size = Vector3(1, 1, 1)
 collision_layer = 3

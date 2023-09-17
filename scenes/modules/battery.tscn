@@ -3,11 +3,8 @@
 [ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_015r7"]
 [ext_resource type="PackedScene" uid="uid://c3bkqnsp2ha6r" path="res://scenes/meshes/battery_mesh.tscn" id="1_myaw0"]
 [ext_resource type="Script" path="res://code/Battery.gd" id="2_b4l0c"]
+[ext_resource type="Material" uid="uid://c1057mhmph67w" path="res://models/Textures/texLights.tres" id="4_0h70p"]
 [ext_resource type="ArrayMesh" uid="uid://c85225snqqnwi" path="res://models/Lightning.obj" id="4_v0rb5"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5mkkr"]
-shading_mode = 0
-albedo_color = Color(0.956863, 0.792157, 0.0745098, 1)
 
 [node name="Battery" type="CollisionShape3D"]
 shape = ExtResource("1_015r7")
@@ -16,22 +13,21 @@ script = ExtResource("2_b4l0c")
 [node name="BatteryMesh" parent="." instance=ExtResource("1_myaw0")]
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-transform = Transform3D(0.843513, 0, -0.537108, 0, 1, 0, 0.537108, 0, 0.843513, 0, 0.685721, 0)
-material_override = SubResource("StandardMaterial3D_5mkkr")
+transform = Transform3D(0.843513, 0, -0.537108, 0, 1, 0, 0.537108, 0, 0.843513, -0.0298877, 0.753587, 0)
+material_override = ExtResource("4_0h70p")
+cast_shadow = 0
 amount = 1
 lifetime = 0.2
 preprocess = 1.0
 randomness = 1.0
+local_coords = true
 mesh = ExtResource("4_v0rb5")
-emission_shape = 1
-emission_sphere_radius = 0.5
 particle_flag_align_y = true
-particle_flag_rotate_y = true
 direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 spread = 180.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-initial_velocity_min = 1.0
-initial_velocity_max = 2.0
+gravity = Vector3(2.08165e-12, 2, 2.08165e-12)
+initial_velocity_min = 0.5
+initial_velocity_max = 3.0
 angle_max = 1.0
 scale_amount_min = 0.05
 scale_amount_max = 0.2
