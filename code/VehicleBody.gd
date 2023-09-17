@@ -136,13 +136,17 @@ func raycast_grid(mouse_position):
 	if placing == null:
 		return
 	
+	var placeholder_mesh_child = $Placeholder.get_child(0)
+	
 	if hovered_row == null:
-		$Placeholder.get_child(0).set_surface_override_material(0, invalid)
+		for i in placeholder_mesh_child.get_surface_override_material_count():
+			placeholder_mesh_child.set_surface_override_material(i, invalid)
 		
 		$Placeholder.position.x = intersection_point.x
 		$Placeholder.position.z = intersection_point.z
 	else:
-		$Placeholder.get_child(0).set_surface_override_material(0, null)
+		for i in placeholder_mesh_child.get_surface_override_material_count():
+			placeholder_mesh_child.set_surface_override_material(i, null)
 		
 		$Placeholder.position.x = hovered_column - core_column
 		$Placeholder.position.z = hovered_row - core_row
