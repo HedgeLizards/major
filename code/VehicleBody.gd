@@ -83,6 +83,8 @@ func enable_building():
 	raycast_grid(get_viewport().get_mouse_position())
 
 func enable_placeholder(index):
+	get_node('../SFX/Module Grab').play()
+	
 	if placing != null:
 		$Placeholder.free()
 	
@@ -184,6 +186,8 @@ func _unhandled_input(event):
 			
 			module.queue_free()
 		else:
+			get_node('../SFX/Module Place').play()
+			
 			var module = [
 				Drill,
 				Battery,
