@@ -4,7 +4,7 @@ var index = 0
 var solid = false
 var powered = false
 
-func _physics_process(_delta):
+func _physics_process(delta: float):
 	for body in get_overlapping_bodies():
 		if body.has_method("dig"):
-			body.dig.rpc($DigCenter.global_position)
+			body.dig.rpc($DigCenter.global_position, delta)
