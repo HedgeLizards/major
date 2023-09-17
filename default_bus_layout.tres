@@ -1,4 +1,9 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://dibd2ftar6osm"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://dibd2ftar6osm"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_x10hr"]
+resource_name = "Reverb"
+predelay_msec = 20.0
+room_size = 0.2
 
 [resource]
 bus/1/name = &"Main"
@@ -17,5 +22,7 @@ bus/3/name = &"SFX"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
-bus/3/volume_db = 0.0
+bus/3/volume_db = -0.130497
 bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectReverb_x10hr")
+bus/3/effect/0/enabled = true
