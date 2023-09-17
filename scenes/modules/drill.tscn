@@ -1,11 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://3h1kh3nyq82u"]
+[gd_scene load_steps=9 format=3 uid="uid://3h1kh3nyq82u"]
 
 [ext_resource type="PackedScene" uid="uid://b103ggyex3ymn" path="res://scenes/meshes/drill_mesh.tscn" id="1_fhb5y"]
 [ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_jr5t1"]
 [ext_resource type="Script" path="res://code/Drill.gd" id="1_pyajo"]
 [ext_resource type="AnimationLibrary" uid="uid://bp76puhi8rpa6" path="res://Animations/Anims.res" id="3_2f5oi"]
+[ext_resource type="Material" uid="uid://4uhl00cfq71s" path="res://models/Textures/texRock.tres" id="5_6v5sj"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lvw7s"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_lf5n6"]
+material = ExtResource("5_6v5sj")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_rwfdi"]
+_data = [Vector2(0, 1), 0.0, 1.00363, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Drill" type="Area3D"]
 collision_layer = 3
@@ -29,3 +38,20 @@ libraries = {
 
 [node name="DigCenter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.20799)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.010107, -0.510277)
+visible = false
+amount = 80
+lifetime = 0.7
+mesh = SubResource("PrismMesh_lf5n6")
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.1, 0.5)
+particle_flag_align_y = true
+gravity = Vector3(2.08165e-12, 2, 15)
+initial_velocity_min = 0.1
+initial_velocity_max = 2.0
+scale_amount_min = 0.5
+scale_amount_max = 2.5
+scale_amount_curve = SubResource("Curve_rwfdi")
+hue_variation_max = 1.0
