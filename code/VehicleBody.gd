@@ -19,6 +19,7 @@ var hovered_row:
 		
 		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW if hovered_row == null else DisplayServer.CURSOR_POINTING_HAND)
 var hovered_column
+var grabbed_position
 
 var forward_speed := 5
 var rotation_speed := 1.0 * PI
@@ -154,14 +155,18 @@ func raycast_grid(mouse_position):
 	var placeholder_mesh_child = $Placeholder.get_child(0)
 	
 	if hovered_row == null:
-		for i in placeholder_mesh_child.get_surface_override_material_count():
-			placeholder_mesh_child.set_surface_override_material(i, invalid)
+		if !placeholder_mesh_child.has_meta('material_0'):
+			for i in placeholder_mesh_child.get_surface_override_material_count():
+				placeholder_mesh_child.set_meta('material_%d' % i, placeholder_mesh_child.get_surface_override_material(i))
+				placeholder_mesh_child.set_surface_override_material(i, invalid)
 		
 		$Placeholder.position.x = intersection_point.x
 		$Placeholder.position.z = intersection_point.z
 	else:
-		for i in placeholder_mesh_child.get_surface_override_material_count():
-			placeholder_mesh_child.set_surface_override_material(i, null)
+		if placeholder_mesh_child.has_meta('material_0'):
+			for i in placeholder_mesh_child.get_surface_override_material_count():
+				placeholder_mesh_child.set_surface_override_material(i, placeholder_mesh_child.get_meta('material_%d' % i))
+				placeholder_mesh_child.remove_meta('material_%d' % i)
 		
 		$Placeholder.position.x = hovered_column - core_column
 		$Placeholder.position.z = hovered_row - core_row
@@ -201,8 +206,12 @@ func _unhandled_input(event):
 			enable_placeholder(module.index, module.rotation.y)
 			
 			module.queue_free()
+			
+			grabbed_position = event.position
 		else:
-			if event.pressed:
+			if event.pressed || event.position == grabbed_position:
+				grabbed_position = null
+				
 				return
 			
 			get_node('../SFX/Module Place').play()
