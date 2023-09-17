@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://faxdrvsdtivq"]
+[gd_scene load_steps=7 format=3 uid="uid://faxdrvsdtivq"]
 
 [ext_resource type="Script" path="res://code/sfx.gd" id="1_3crpc"]
 [ext_resource type="AudioStream" uid="uid://bjjrjjuu5sodh" path="res://audio/SND_SHOT.wav" id="1_j4yv0"]
 [ext_resource type="AudioStream" uid="uid://bkko4kffno7of" path="res://audio/SND_DRILL_LOOP.ogg" id="3_b8tal"]
+[ext_resource type="AudioStream" uid="uid://cvntdmddloapc" path="res://audio/SND_MODULE_GRAB.wav" id="4_kq6ta"]
+[ext_resource type="AudioStream" uid="uid://j8mxssbtkpas" path="res://audio/SND_MODULE_ROTATE.wav" id="5_8v2sd"]
+[ext_resource type="AudioStream" uid="uid://dvuq80mcnohnq" path="res://audio/SND_MODULE_PLACE.wav" id="6_7gk26"]
 
 [node name="SFX" type="Node3D"]
 script = ExtResource("1_3crpc")
@@ -18,3 +21,15 @@ stream = ExtResource("3_b8tal")
 max_db = 0.0
 bus = &"SFX"
 doppler_tracking = 2
+
+[node name="Module Grab" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_kq6ta")
+bus = &"UI"
+
+[node name="Module Rotate" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_8v2sd")
+bus = &"UI"
+
+[node name="Module Place" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_7gk26")
+bus = &"UI"
