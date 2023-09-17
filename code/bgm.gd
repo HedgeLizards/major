@@ -1,7 +1,10 @@
 extends Node3D
 
+@export var max_volume = -10
+
 const MAIN = "Main";
 const COMBAT = "Combat";
+
 
 var tracks = [MAIN, COMBAT];
 var current_track = MAIN;
@@ -9,7 +12,7 @@ var tween;
 
 func _ready():
 	for track in tracks:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(track), 0 if track == current_track else -50)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(track), max_volume if track == current_track else -50)
 
 func crossfade_buses(to_bus_name, duration):
 	if to_bus_name == current_track:
@@ -29,7 +32,7 @@ func crossfade_buses(to_bus_name, duration):
 		var index = AudioServer.get_bus_index(track)
 		
 		if track == current_track:
-			tween.tween_method(func(value): AudioServer.set_bus_volume_db(index, value), AudioServer.get_bus_volume_db(index), 0, fadein_duration)
+			tween.tween_method(func(value): AudioServer.set_bus_volume_db(index, value), AudioServer.get_bus_volume_db(index), max_volume, fadein_duration)
 		else:
 			tween.tween_method(func(value): AudioServer.set_bus_volume_db(index, value), AudioServer.get_bus_volume_db(index), -50.0, fadeout_duration)
 
@@ -39,7 +42,7 @@ func _process(delta):
 
 func test_music():
 	if Input.is_action_just_pressed("debug_music_change"):
-		crossfade_buses(COMBAT if current_track == MAIN else MAIN, 2)
+		crossfade_buses(COMBAT if current_track == MAIN else MAIN, 4)
 		print(current_track);
 
 func mute_music():
