@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqyvkiou11o8"]
+[gd_scene load_steps=4 format=3 uid="uid://cqyvkiou11o8"]
 
 [ext_resource type="PackedScene" uid="uid://c31uj44aqebea" path="res://models/Modules/Wheel.gltf" id="1_q5yla"]
+[ext_resource type="Material" uid="uid://ba4qcrer4ax86" path="res://models/Textures/texInterior.tres" id="2_alqhq"]
+[ext_resource type="Material" uid="uid://b5yp2vx3j3cnh" path="res://models/Textures/texTracks.tres" id="3_cipcq"]
 
 [node name="WheelMesh" instance=ExtResource("1_q5yla")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Cylinder_001" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_alqhq")
+surface_material_override/1 = ExtResource("2_alqhq")
+surface_material_override/2 = ExtResource("3_cipcq")

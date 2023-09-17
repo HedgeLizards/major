@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3bkqnsp2ha6r"]
+[gd_scene load_steps=5 format=3 uid="uid://c3bkqnsp2ha6r"]
 
 [ext_resource type="PackedScene" uid="uid://bex7pcrgwp2ex" path="res://models/Modules/Battery.gltf" id="1_8kfde"]
+[ext_resource type="Material" uid="uid://bs7oyubpg4k2c" path="res://models/Textures/texMetal.tres" id="2_gewja"]
+[ext_resource type="Material" uid="uid://ba4qcrer4ax86" path="res://models/Textures/texInterior.tres" id="3_2fc07"]
+[ext_resource type="Material" uid="uid://cav360fd4lpr0" path="res://models/Textures/texBattery.tres" id="4_e25s5"]
 
 [node name="BatteryMesh" instance=ExtResource("1_8kfde")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Core_001" parent="." index="0"]
-transform = Transform3D(0.4356, 0, 0, 0, 0.4356, 0, 0, 0, 0.4356, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+transform = Transform3D(0.4356, 0, 0, 0, 0.4356, 0, -4.55806e-16, 0, 0.4356, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+surface_material_override/0 = ExtResource("2_gewja")
+surface_material_override/1 = ExtResource("3_2fc07")
+surface_material_override/2 = ExtResource("4_e25s5")
