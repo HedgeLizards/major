@@ -105,4 +105,5 @@ shoot={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="forward_plus"
+renderer/rendering_method.web="forward_plus"
