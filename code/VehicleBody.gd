@@ -197,9 +197,10 @@ func _unhandled_input(event):
 			
 			var module = components[hovered_point]
 			var point: Vector2i = hovered_point
-			enable_placeholder(module.index, module.rotation.y)
-			print("h ", point)
+			
 			remove_module.rpc(point)
+			
+			enable_placeholder(module.index, module.rotation.y)
 			
 			grabbed_position = event.position
 		else:
