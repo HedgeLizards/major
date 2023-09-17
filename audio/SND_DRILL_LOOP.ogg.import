@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/SND_DRILL_LOOP.ogg-0c238f61569534a4054c85323f
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0.0
 bpm=0.0
 beat_count=0

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://6xw0fqt0mqur"
-path="res://.godot/imported/SND_SHOT.wav-4ae7ad3074494e21dbac532acd83c541.sample"
+path="res://.godot/imported/SND_FIRE.wav-4f74a6ef15ed5e8ca3ed0222a3493088.sample"
 
 [deps]
 
-source_file="res://audio/SND_SHOT.wav"
-dest_files=["res://.godot/imported/SND_SHOT.wav-4ae7ad3074494e21dbac532acd83c541.sample"]
+source_file="res://audio/SND_FIRE.wav"
+dest_files=["res://.godot/imported/SND_FIRE.wav-4f74a6ef15ed5e8ca3ed0222a3493088.sample"]
 
 [params]
 
