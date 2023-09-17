@@ -16,14 +16,15 @@ script = ExtResource("1_pyajo")
 [node name="DrillMesh" parent="." instance=ExtResource("1_fhb5y")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DrillMesh"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = ExtResource("1_jr5t1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../DrillMesh")
 autoplay = "Spin"
 libraries = {
 "": ExtResource("3_2f5oi"),
 "MajorAnimations": SubResource("AnimationLibrary_lvw7s")
 }
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = ExtResource("1_jr5t1")
 
 [node name="DigCenter" type="Node3D" parent="."]
