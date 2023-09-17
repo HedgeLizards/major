@@ -51,10 +51,19 @@ func create_frees():
 	for r in grid.size():
 		for c in grid[0].size():
 			if grid[r][c] == null && (
-				(r > 0 && grid[r - 1][c] != null && grid[r - 1][c].index != -1) || \
-				(r < grid.size() - 1 && grid[r + 1][c] != null && grid[r + 1][c].index != -1) || \
-				(c > 0 && grid[r][c - 1] != null && grid[r][c - 1].index != -1) || \
-				(c < grid[0].size() - 1 && grid[r][c + 1] != null && grid[r][c + 1].index != -1)
+				(r > 0 && grid[r - 1][c] != null && grid[r - 1][c].solid) || \
+				(c > 0 && grid[r][c - 1] != null && grid[r][c - 1].solid) || \
+				(c < grid[0].size() - 1 && grid[r][c + 1] != null && grid[r][c + 1].solid) || \
+				(r < grid.size() - 1 && grid[r + 1][c] != null && grid[r + 1][c].solid)
+			) && (
+				(r > 0 && c > 0 && grid[r - 1][c - 1] != null && grid[r - 1][c - 1].powered) || \
+				(r > 0 && grid[r - 1][c] != null && grid[r - 1][c].powered) || \
+				(r > 0 && c < grid[0].size() - 1 && grid[r - 1][c + 1] != null && grid[r - 1][c + 1].powered) || \
+				(c > 0 && grid[r][c - 1] != null && grid[r][c - 1].powered) || \
+				(c < grid[0].size() - 1 && grid[r][c + 1] != null && grid[r][c + 1].powered) || \
+				(r < grid.size() - 1 && c > 0 && grid[r + 1][c - 1] != null && grid[r + 1][c - 1].powered) || \
+				(r < grid.size() - 1 && grid[r + 1][c] != null && grid[r + 1][c].powered) || \
+				(r < grid.size() - 1 && c < grid[0].size() - 1 && grid[r + 1][c + 1] != null && grid[r + 1][c + 1].powered)
 			):
 				create_free_at(r, c)
 
@@ -86,7 +95,8 @@ func enable_placeholder(index, rotation_y = 0):
 	get_node('../SFX/Module Grab').play()
 	
 	if placing != null:
-		rotation_y = $Placeholder.rotation.y + PI / 2
+		if index == 0 || index == 3:
+			rotation_y = $Placeholder.rotation.y + PI / 2
 		
 		$Placeholder.free()
 	
@@ -177,10 +187,13 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		raycast_grid(event.position)
 	elif event is InputEventMouseButton:
-		if event.button_index != MOUSE_BUTTON_LEFT || event.pressed || hovered_row == null:
+		if event.button_index != MOUSE_BUTTON_LEFT || hovered_row == null:
 			return
 		
 		if placing == null:
+			if !event.pressed:
+				return
+			
 			var module = grid[hovered_row][hovered_column]
 			
 			create_free_at(hovered_row, hovered_column)
@@ -189,6 +202,9 @@ func _unhandled_input(event):
 			
 			module.queue_free()
 		else:
+			if event.pressed:
+				return
+			
 			get_node('../SFX/Module Place').play()
 			
 			var module = [
@@ -244,10 +260,12 @@ func _unhandled_input(event):
 		
 		match event.keycode:
 			KEY_R:
-				if placing != null:
-					get_node('../SFX/Module Rotate').play()
-					
-					$Placeholder.rotation.y += (PI if event.shift_pressed else -PI) / 2
+				if placing != 0 && placing != 3:
+					return
+				
+				get_node('../SFX/Module Rotate').play()
+				
+				$Placeholder.rotation.y += (PI if event.shift_pressed else -PI) / 2
 			KEY_BACKSPACE, KEY_DELETE:
 				disable_placeholder()
 			KEY_ESCAPE:
