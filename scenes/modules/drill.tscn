@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://3h1kh3nyq82u"]
+[gd_scene load_steps=6 format=3 uid="uid://3h1kh3nyq82u"]
 
 [ext_resource type="PackedScene" uid="uid://b103ggyex3ymn" path="res://scenes/meshes/drill_mesh.tscn" id="1_fhb5y"]
 [ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_jr5t1"]
 [ext_resource type="Script" path="res://code/Drill.gd" id="1_pyajo"]
+[ext_resource type="AnimationLibrary" uid="uid://bp76puhi8rpa6" path="res://Animations/Anims.res" id="3_2f5oi"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lvw7s"]
 
 [node name="Drill" type="Area3D"]
 collision_layer = 3
@@ -11,6 +14,14 @@ input_ray_pickable = false
 script = ExtResource("1_pyajo")
 
 [node name="DrillMesh" parent="." instance=ExtResource("1_fhb5y")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DrillMesh"]
+autoplay = "Spin"
+libraries = {
+"": ExtResource("3_2f5oi"),
+"MajorAnimations": SubResource("AnimationLibrary_lvw7s")
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = ExtResource("1_jr5t1")

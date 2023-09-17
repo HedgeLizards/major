@@ -13,3 +13,5 @@ func _process(delta):
 func test_fire():
 	if Input.is_action_just_pressed("fire"):
 		$Fire.play();
+	
+	
