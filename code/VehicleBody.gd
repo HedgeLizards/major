@@ -9,27 +9,19 @@ var Shield = preload('res://scenes/modules/shield.tscn')
 var Mine = preload('res://scenes/modules/mine.tscn')
 var invalid = preload('res://resources/invalid.tres')
 
-var core_row = 1
-var core_column = 1
 var building = false
 var placing
-var hovered_row:
+var hovered_point:
 	set(value):
-		hovered_row = value
-		
-		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW if hovered_row == null else DisplayServer.CURSOR_POINTING_HAND)
-var hovered_column
+		hovered_point = value
+		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW if hovered_point == null else DisplayServer.CURSOR_POINTING_HAND)
 var grabbed_position
 
 var forward_speed := 5
 var rotation_speed := 1.0 * PI
 
 @onready var camera = %Camera3D
-@onready var grid = [
-	[null, null, null],
-	[null, $Core, null],
-	[null, null, null],
-]
+@onready var components = {Vector2i(0, 0): $Core}
 @onready var input := %PlayerInput
 
 # Set by the authority, synchronized on spawn.
@@ -49,43 +41,45 @@ func _ready():
 	create_frees()
 
 func create_frees():
-	for r in grid.size():
-		for c in grid[0].size():
-			if grid[r][c] == null && (
-				(r > 0 && grid[r - 1][c] != null && grid[r - 1][c].solid) || \
-				(c > 0 && grid[r][c - 1] != null && grid[r][c - 1].solid) || \
-				(c < grid[0].size() - 1 && grid[r][c + 1] != null && grid[r][c + 1].solid) || \
-				(r < grid.size() - 1 && grid[r + 1][c] != null && grid[r + 1][c].solid)
-			) && (
-				(r > 0 && c > 0 && grid[r - 1][c - 1] != null && grid[r - 1][c - 1].powered) || \
-				(r > 0 && grid[r - 1][c] != null && grid[r - 1][c].powered) || \
-				(r > 0 && c < grid[0].size() - 1 && grid[r - 1][c + 1] != null && grid[r - 1][c + 1].powered) || \
-				(c > 0 && grid[r][c - 1] != null && grid[r][c - 1].powered) || \
-				(c < grid[0].size() - 1 && grid[r][c + 1] != null && grid[r][c + 1].powered) || \
-				(r < grid.size() - 1 && c > 0 && grid[r + 1][c - 1] != null && grid[r + 1][c - 1].powered) || \
-				(r < grid.size() - 1 && grid[r + 1][c] != null && grid[r + 1][c].powered) || \
-				(r < grid.size() - 1 && c < grid[0].size() - 1 && grid[r + 1][c + 1] != null && grid[r + 1][c + 1].powered)
-			):
-				create_free_at(r, c)
+	var near_solid = {} # use as Set
+	var near_power = {}
+	for p in components:
+		if components[p].solid:
+			near_solid[p + Vector2i(0, 1)] = true
+			near_solid[p + Vector2i(0, -1)] = true
+			near_solid[p + Vector2i(1, 0)] = true
+			near_solid[p + Vector2i(-1, 0)] = true
+		if components[p].powered:
+			near_power[p + Vector2i(0, 1)] = true
+			near_power[p + Vector2i(0, -1)] = true
+			near_power[p + Vector2i(1, 0)] = true
+			near_power[p + Vector2i(-1, 0)] = true
+			near_power[p + Vector2i(1, 1)] = true
+			near_power[p + Vector2i(1, -1)] = true
+			near_power[p + Vector2i(-1, 1)] = true
+			near_power[p + Vector2i(-1, -1)] = true
+	for p in near_power:
+		if near_solid.has(p) and !components.has(p):
+			create_free_at(p)
 
-func create_free_at(row, column):
+func create_free_at(p: Vector2i):
 	var free = Free.instantiate()
 	
-	free.position.x = column - core_column
+	free.position.x = p.x
 	free.position.y = -0.4
-	free.position.z = row - core_row
+	free.position.z = p.y
 	
 	add_child(free)
+
+	components[p] = free
 	
-	grid[row][column] = free
 
 func toggle_frees():
 	var tween = create_tween().set_parallel().set_trans(Tween.TRANS_SINE)
-	
-	for r in grid.size():
-		for c in grid[0].size():
-			if grid[r][c] != null && grid[r][c].index == -1:
-				tween.tween_property(grid[r][c].get_surface_override_material(0), 'albedo_color:a', 0.0 if placing == null else 0.5, 0.2)
+	for p in components:
+		var component = components[p]
+		if component.index == -1:
+			tween.tween_property(component.get_surface_override_material(0), 'albedo_color:a', 0.0 if placing == null else 0.5, 0.2)
 
 func enable_building():
 	building = true
@@ -133,28 +127,20 @@ func raycast_grid(mouse_position):
 	)
 	
 	if intersection_point == null:
-		hovered_row = null
-		hovered_column = null
+		hovered_point = null
 	else:
 		intersection_point = to_local(intersection_point)
 		
-		hovered_row = floor(intersection_point.z + 0.5) + core_row
-		hovered_column = floor(intersection_point.x + 0.5) + core_column
-		
-		if hovered_row < 0 || hovered_row >= grid.size() || \
-			hovered_column < 0 || hovered_column >= grid[0].size() || \
-			grid[hovered_row][hovered_column] == null || \
-			(placing == null && grid[hovered_row][hovered_column].index < 0) || \
-			(placing != null && grid[hovered_row][hovered_column].index != -1):
-			hovered_row = null
-			hovered_column = null
+		hovered_point = Vector2i(floor(intersection_point.x + 0.5), floor(intersection_point.z + 0.5))
+		if !components.has(hovered_point) || placing == null && components[hovered_point].index < 0 || placing != null && components[hovered_point].index != -1:
+			hovered_point = null
 	
 	if placing == null:
 		return
 	
 	var placeholder_mesh_child = $Placeholder.get_child(0)
 	
-	if hovered_row == null:
+	if hovered_point == null:
 		if !placeholder_mesh_child.has_meta('material_0'):
 			for i in placeholder_mesh_child.get_surface_override_material_count():
 				placeholder_mesh_child.set_meta('material_%d' % i, placeholder_mesh_child.get_surface_override_material(i))
@@ -168,8 +154,8 @@ func raycast_grid(mouse_position):
 				placeholder_mesh_child.set_surface_override_material(i, placeholder_mesh_child.get_meta('material_%d' % i))
 				placeholder_mesh_child.remove_meta('material_%d' % i)
 		
-		$Placeholder.position.x = hovered_column - core_column
-		$Placeholder.position.z = hovered_row - core_row
+		$Placeholder.position.x = hovered_point.x
+		$Placeholder.position.z = hovered_point.y
 
 func disable_placeholder():
 	if placing == null:
@@ -178,8 +164,7 @@ func disable_placeholder():
 	$Placeholder.queue_free()
 	
 	placing = null
-	hovered_row = null
-	hovered_column = null
+	hovered_point = null
 	
 	toggle_frees()
 
@@ -192,16 +177,16 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		raycast_grid(event.position)
 	elif event is InputEventMouseButton:
-		if event.button_index != MOUSE_BUTTON_LEFT || hovered_row == null:
+		if event.button_index != MOUSE_BUTTON_LEFT || hovered_point == null:
 			return
 		
 		if placing == null:
 			if !event.pressed:
 				return
 			
-			var module = grid[hovered_row][hovered_column]
+			var module = components[hovered_point]
 			
-			create_free_at(hovered_row, hovered_column)
+			create_free_at(hovered_point)
 			
 			enable_placeholder(module.index, module.rotation.y)
 			
@@ -216,51 +201,7 @@ func _unhandled_input(event):
 			
 			get_node('../SFX/Module Place').play()
 			
-			var module = [
-				Drill,
-				Battery,
-				Wheel,
-				Gun,
-				Shield,
-				Mine,
-			][placing].instantiate()
-			
-			module.position.x = hovered_column - core_column
-			module.position.z = hovered_row - core_row
-			module.rotation.y = $Placeholder.rotation.y + PI / 2
-			
-			add_child(module)
-			
-			grid[hovered_row][hovered_column].queue_free()
-			grid[hovered_row][hovered_column] = module
-			
-			if hovered_row == 0:
-				core_row += 1
-				
-				var row = []
-				
-				row.resize(grid[0].size())
-				
-				grid.push_front(row)
-			
-			if hovered_row == grid.size() - 1:
-				var row = []
-				
-				row.resize(grid[0].size())
-				
-				grid.push_back(row)
-			
-			if hovered_column == 0:
-				core_column += 1
-				
-				for row in grid:
-					row.push_front(null)
-			
-			if hovered_column == grid[0].size() - 1:
-				for row in grid:
-					row.push_back(null)
-			
-			create_frees()
+			add_module.rpc(placing, hovered_point, $Placeholder.rotation.y + PI / 2)
 			
 			toggle_frees() # disable_placeholder() instead if moving existing module or not enough resources left
 	elif event is InputEventKey:
@@ -280,6 +221,26 @@ func _unhandled_input(event):
 			KEY_ESCAPE:
 				disable_placeholder()
 
+@rpc("any_peer", "call_local", "reliable")
+func add_module(placing: int, point: Vector2i, rot: float):
+	var module: Node3D = [
+		Drill,
+		Battery,
+		Wheel,
+		Gun,
+		Shield,
+		Mine,
+	][placing].instantiate()
+
+	module.position.x = point.x
+	module.position.z = point.y
+	module.rotation.y = rot
+	add_child(module)
+	if components.has(point):
+		components[point].queue_free()
+	components[point] = module
+	create_frees()
+
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
 		raycast_grid(get_viewport().get_mouse_position())
@@ -293,6 +254,5 @@ func _integrate_forces(state):
 	var velocity = Vector2()
 
 	state.angular_velocity = Vector3(0, -input.rot * rotation_speed,0).rotated(Vector3(0, 1, 0), rotation.y)
-#	rotation.y += input.rot * rotation_speed
 
 	state.linear_velocity = Vector3(0, 0, -input.speed * forward_speed).rotated(Vector3(0, 1, 0), rotation.y)
