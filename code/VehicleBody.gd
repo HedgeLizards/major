@@ -189,13 +189,10 @@ func _unhandled_input(event):
 				return
 			
 			var module = components[hovered_point]
-
-			components.erase(hovered_point)
-			create_frees()
-			
+			var point: Vector2i = hovered_point
 			enable_placeholder(module.index, module.rotation.y)
-			
-			module.queue_free()
+			print("h ", point)
+			remove_module.rpc(point)
 			
 			grabbed_position = event.position
 		else:
@@ -244,6 +241,12 @@ func add_module(placing: int, point: Vector2i, rot: float):
 	if components.has(point):
 		components[point].queue_free()
 	components[point] = module
+	create_frees()
+
+@rpc("any_peer", "call_local", "reliable")
+func remove_module(point: Vector2i):
+	components[point].queue_free()
+	components.erase(point)
 	create_frees()
 
 func _notification(what):
