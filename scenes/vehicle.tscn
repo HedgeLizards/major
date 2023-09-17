@@ -45,25 +45,29 @@ _data = {
 "RESET": SubResource("Animation_w87bd")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_db0ja"]
-properties/0/path = NodePath("PlayerInput:inp")
-properties/0/spawn = false
-properties/0/sync = true
-properties/0/watch = false
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34npo"]
-properties/0/path = NodePath(".:position")
+properties/0/path = NodePath("Body:player")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = true
-properties/1/path = NodePath(".:player")
+properties/0/sync = false
+properties/0/watch = false
+properties/1/path = NodePath("Body:position")
 properties/1/spawn = true
-properties/1/sync = false
+properties/1/sync = true
 properties/1/watch = false
-properties/2/path = NodePath(".:rotation")
+properties/2/path = NodePath("Body:rotation")
 properties/2/spawn = true
 properties/2/sync = true
 properties/2/watch = false
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_db0ja"]
+properties/0/path = NodePath("PlayerInput:rot")
+properties/0/spawn = false
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath("PlayerInput:speed")
+properties/1/spawn = false
+properties/1/sync = true
+properties/1/watch = false
 
 [node name="Vehicle" type="Node3D"]
 script = ExtResource("2_ewdcd")
@@ -95,13 +99,13 @@ libraries = {
 
 [node name="Core" parent="Body" instance=ExtResource("3_clmha")]
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_34npo")
+
 [node name="PlayerInput" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_db0ja")
 script = ExtResource("3_8kft6")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_34npo")
 
 [node name="BGM" parent="." instance=ExtResource("4_m7n3s")]
 
