@@ -29,7 +29,7 @@ func _exit_tree():
 func add_player(id: int):
 	var character = preload("res://scenes/vehicle.tscn").instantiate()
 	# Set player id.
-	character.player = id
+	character.get_node("Body").player = id
 	# Randomize character position.
 	var pos := Vector2.from_angle(randf() * 2 * PI)
 	character.position = Vector3(pos.x * SPAWN_RANDOM * randf(), 0.5, pos.y * SPAWN_RANDOM * randf())
