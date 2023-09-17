@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c7cc5tglghuy1"
-path="res://.godot/imported/SND_MODULE_SELL.wav-7a9342b4ef4b238654cf8441381717cd.sample"
+path="res://.godot/imported/SND_MODULE_DELETE.wav-f0df1dfa335f40806b5b5e46c561b3ee.sample"
 
 [deps]
 
-source_file="res://audio/SND_MODULE_SELL.wav"
-dest_files=["res://.godot/imported/SND_MODULE_SELL.wav-7a9342b4ef4b238654cf8441381717cd.sample"]
+source_file="res://audio/SND_MODULE_DELETE.wav"
+dest_files=["res://.godot/imported/SND_MODULE_DELETE.wav-f0df1dfa335f40806b5b5e46c561b3ee.sample"]
 
 [params]
 
