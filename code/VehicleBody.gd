@@ -82,10 +82,12 @@ func enable_building():
 	
 	raycast_grid(get_viewport().get_mouse_position())
 
-func enable_placeholder(index):
+func enable_placeholder(index, rotation_y = 0):
 	get_node('../SFX/Module Grab').play()
 	
 	if placing != null:
+		rotation_y = $Placeholder.rotation.y + PI / 2
+		
 		$Placeholder.free()
 	
 	placing = index
@@ -101,6 +103,7 @@ func enable_placeholder(index):
 	var placeholder_mesh = placeholder_mesh_parent.get_child(0)
 	
 	placeholder_mesh.name = 'Placeholder'
+	placeholder_mesh.rotation.y += rotation_y
 	placeholder_mesh_parent.remove_child(placeholder_mesh)
 	
 	add_child(placeholder_mesh)
@@ -182,7 +185,7 @@ func _unhandled_input(event):
 			
 			create_free_at(hovered_row, hovered_column)
 			
-			enable_placeholder(module.index)
+			enable_placeholder(module.index, module.rotation.y)
 			
 			module.queue_free()
 		else:
@@ -199,6 +202,7 @@ func _unhandled_input(event):
 			
 			module.position.x = hovered_column - core_column
 			module.position.z = hovered_row - core_row
+			module.rotation.y = $Placeholder.rotation.y + PI / 2
 			
 			add_child(module)
 			
@@ -235,8 +239,19 @@ func _unhandled_input(event):
 			
 			toggle_frees() # disable_placeholder() instead if moving existing module or not enough resources left
 	elif event is InputEventKey:
-		if event.keycode == KEY_ESCAPE:
-			disable_placeholder()
+		if event.echo || !event.pressed:
+			return
+		
+		match event.keycode:
+			KEY_R:
+				if placing != null:
+					get_node('../SFX/Module Rotate').play()
+					
+					$Placeholder.rotation.y += (PI if event.shift_pressed else -PI) / 2
+			KEY_BACKSPACE, KEY_DELETE:
+				disable_placeholder()
+			KEY_ESCAPE:
+				disable_placeholder()
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
