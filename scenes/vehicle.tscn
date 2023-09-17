@@ -101,11 +101,10 @@ libraries = {
 [node name="Core" parent="Body" instance=ExtResource("3_clmha")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02681, -0.665223)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.15043, 2.08165e-12)
 light_energy = 10.0
 shadow_enabled = true
-omni_range = 20.0
-omni_attenuation = 1.23114
+omni_range = 40.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_34npo")
