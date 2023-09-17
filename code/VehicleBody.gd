@@ -195,7 +195,7 @@ func _unhandled_input(event):
 		
 		create_frees()
 		
-		disable_placeholder()
+		toggle_frees() # disable_placeholder() instead if not enough resources left
 	elif event is InputEventKey:
 		if event.keycode == KEY_ESCAPE:
 			disable_placeholder()
