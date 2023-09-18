@@ -293,9 +293,19 @@ func are_all_modules_valid():
 		if module.index >= 0 && !is_module_valid(module.index, p, false):
 			return false
 	
-	# dfs_from_core with reachable_from_core
+	return dfs_from_core([Vector2i(0, 0)], Vector2i(0, 0)).size() == modules.size()
+
+func dfs_from_core(reachable_from_core, point):
+	for offset in [Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0), Vector2i(0, 1)]:
+		var neighbour = point + offset
+		
+		if modules.has(neighbour) && !reachable_from_core.has(neighbour):
+			reachable_from_core.push_back(neighbour)
+			
+			if modules[neighbour].index != -1:
+				dfs_from_core(reachable_from_core, neighbour)
 	
-	return true
+	return reachable_from_core
 
 @rpc("any_peer", "call_local", "reliable")
 func add_module(placing: int, point: Vector2i, rot: float):
