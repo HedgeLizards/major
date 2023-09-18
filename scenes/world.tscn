@@ -24,7 +24,6 @@ fog_light_color = Color(0.435294, 0.227451, 0.0862745, 1)
 volumetric_fog_density = 0.1
 volumetric_fog_albedo = Color(0, 0, 0, 1)
 adjustment_enabled = true
-adjustment_saturation = 1.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_l287f"]
 size = Vector2(200, 300)
