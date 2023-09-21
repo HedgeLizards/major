@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://3h1kh3nyq82u"]
+[gd_scene load_steps=10 format=3 uid="uid://3h1kh3nyq82u"]
 
 [ext_resource type="PackedScene" uid="uid://b103ggyex3ymn" path="res://scenes/meshes/drill_mesh.tscn" id="1_fhb5y"]
 [ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_jr5t1"]
 [ext_resource type="Script" path="res://code/Drill.gd" id="1_pyajo"]
 [ext_resource type="AnimationLibrary" uid="uid://bp76puhi8rpa6" path="res://Animations/Anims.res" id="3_2f5oi"]
 [ext_resource type="Material" uid="uid://b1ofjqa7sx87k" path="res://models/Textures/texFloor.tres" id="5_j2vtg"]
+[ext_resource type="AudioStream" uid="uid://bkko4kffno7of" path="res://audio/SND_DRILL_LOOP.ogg" id="6_hbqa2"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lvw7s"]
 
@@ -37,11 +38,11 @@ libraries = {
 }
 
 [node name="DigCenter" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.960322)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.737562)
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.010107, -0.510277)
-visible = false
+emitting = false
 amount = 80
 lifetime = 0.5
 local_coords = true
@@ -56,3 +57,7 @@ scale_amount_min = 0.5
 scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_rwfdi")
 hue_variation_max = 1.0
+
+[node name="SND_DRILL_LOOP" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_hbqa2")
+bus = &"SFX"

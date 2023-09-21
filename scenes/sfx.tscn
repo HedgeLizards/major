@@ -13,43 +13,43 @@
 [node name="SFX" type="Node3D"]
 script = ExtResource("1_3crpc")
 
-[node name="Fire" type="AudioStreamPlayer3D" parent="."]
+[node name="SND_SHOOT" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_oce1e")
 max_db = 0.0
 bus = &"SFX"
 doppler_tracking = 2
 
-[node name="Drill" type="AudioStreamPlayer3D" parent="."]
+[node name="SND_DRILL_LOOP" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_b8tal")
 volume_db = -5.0
 max_db = 0.0
 bus = &"SFX"
 doppler_tracking = 2
 
-[node name="Ore Collect" type="AudioStreamPlayer3D" parent="."]
+[node name="SND_COLLECT_ORE" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_kwud6")
 bus = &"SFX"
 
-[node name="Hit" type="AudioStreamPlayer3D" parent="."]
+[node name="SND_HIT" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_d3drh")
 bus = &"SFX"
 
-[node name="Destroy" type="AudioStreamPlayer3D" parent="."]
+[node name="SND_DESTROY" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_kwud6")
 bus = &"SFX"
 
-[node name="Module Grab" type="AudioStreamPlayer" parent="."]
+[node name="SND_MODULE_GRAB" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_kq6ta")
 bus = &"UI"
 
-[node name="Module Rotate" type="AudioStreamPlayer" parent="."]
+[node name="SND_MODULE_ROTATE" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_8v2sd")
 bus = &"UI"
 
-[node name="Module Place" type="AudioStreamPlayer" parent="."]
+[node name="SND_MODULE_PLACE" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_7gk26")
 bus = &"UI"
 
-[node name="Module Sell" type="AudioStreamPlayer" parent="."]
+[node name="SND_MODULE_DELETE" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_1tv3x")
 bus = &"UI"

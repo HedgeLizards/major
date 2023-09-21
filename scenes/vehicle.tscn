@@ -117,5 +117,7 @@ replication_config = SubResource("SceneReplicationConfig_db0ja")
 script = ExtResource("3_8kft6")
 
 [node name="BGM" parent="." instance=ExtResource("4_m7n3s")]
+unique_name_in_owner = true
 
 [node name="SFX" parent="." instance=ExtResource("5_f8oks")]
+unique_name_in_owner = true

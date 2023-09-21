@@ -4,7 +4,31 @@ var index = 0
 var solid = false
 var powered = false
 
+signal drill
+
+func _ready():
+	$AnimationPlayer.stop();
+
 func _physics_process(delta: float):
+	var is_digging = false;
+	
 	for body in get_overlapping_bodies():
 		if body.has_method("dig"):
+			is_digging = true;
 			body.dig($DigCenter.global_position, delta)
+	
+	if is_digging:
+		# Replace this with the signal stuff
+		if !$SND_DRILL_LOOP.playing:
+			$SND_DRILL_LOOP.play()
+		if !$CPUParticles3D.emitting:
+			$CPUParticles3D.emitting = true
+		if !$AnimationPlayer.is_playing():
+			$AnimationPlayer.play()
+	else:
+		if $SND_DRILL_LOOP.playing:
+			$SND_DRILL_LOOP.stop()
+		if $CPUParticles3D.emitting:
+			$CPUParticles3D.emitting = false
+		if $AnimationPlayer.is_playing():
+			$AnimationPlayer.stop()
