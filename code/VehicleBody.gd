@@ -105,7 +105,7 @@ func enable_building():
 	raycast_grid(get_viewport().get_mouse_position())
 
 func enable_placeholder(index, rotation_y = 0):
-	get_node('../SFX/Module Grab').play()
+	get_node('../SFX/SND_MODULE_GRAB').play()
 	
 	if placing != null:
 		if index == 0 || index == 3:
@@ -223,7 +223,7 @@ func _unhandled_input(event):
 				
 				return
 			
-			get_node('../SFX/Module Place').play()
+			get_node('../SFX/SND_MODULE_PLACE').play()
 			
 			add_module.rpc(placing, hovered_point, $Placeholder.rotation.y + PI / 2)
 			
@@ -240,7 +240,7 @@ func _unhandled_input(event):
 				if placing != 0 && placing != 3:
 					return
 				
-				get_node('../SFX/Module Rotate').play()
+				get_node('../SFX/SND_MODULE_ROTATE').play()
 				
 				$Placeholder.rotation.y += (PI if event.shift_pressed else -PI) / 2
 				
