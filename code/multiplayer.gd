@@ -60,7 +60,7 @@ func start_lobby():
 	$Lobby/HostControls.visible = multiplayer.is_server()
 	if multiplayer.is_server():
 		$Lobby/HostControls/IpAddresses.text = "\n".join(IP.get_local_addresses())
-
+ 
 @rpc("authority", "call_local", "reliable")
 func start_game():
 	print("starting game")

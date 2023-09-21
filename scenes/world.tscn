@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_kh57m"]
 [ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
-[ext_resource type="Material" path="res://models/Textures/texFloor.tres" id="2_xn5t0"]
+[ext_resource type="Material" uid="uid://b1ofjqa7sx87k" path="res://models/Textures/texFloor.tres" id="2_xn5t0"]
 [ext_resource type="PackedScene" uid="uid://c6eg277q0xoij" path="res://scenes/pebbles.tscn" id="3_eww8l"]
 [ext_resource type="Script" path="res://code/Environment.gd" id="4_c36pg"]
-[ext_resource type="Material" uid="uid://bc3pkn0a28h1v" path="res://models/Textures/texPitch.tres" id="5_abip6"]
+[ext_resource type="Material" path="res://models/Textures/texPitch.tres" id="5_abip6"]
 [ext_resource type="ArrayMesh" uid="uid://nj50x3ekh612" path="res://models/Ground.obj" id="5_nmo1o"]
 [ext_resource type="Script" path="res://code/Creator.gd" id="7_fydrv"]
 

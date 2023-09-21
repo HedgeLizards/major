@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://code/bullet.gd" id="1_vwic3"]
 [ext_resource type="ArrayMesh" uid="uid://d0k1jrttfgnec" path="res://models/bullet.obj" id="2_jh6he"]
 [ext_resource type="Material" uid="uid://bs7oyubpg4k2c" path="res://models/Textures/texMetal.tres" id="3_y8noy"]
-[ext_resource type="Material" uid="uid://bc3pkn0a28h1v" path="res://models/Textures/texPitch.tres" id="4_m7by6"]
+[ext_resource type="Material" path="res://models/Textures/texPitch.tres" id="4_m7by6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8w12m"]
 diffuse_mode = 3

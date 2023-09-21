@@ -36,7 +36,7 @@ func crossfade_buses(to_bus_name, duration):
 		else:
 			tween.tween_method(func(value): AudioServer.set_bus_volume_db(index, value), AudioServer.get_bus_volume_db(index), -50.0, fadeout_duration)
 
-func _process(delta):
+func _process(_delta):
 	test_music();
 	mute_music();
 

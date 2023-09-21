@@ -358,13 +358,12 @@ func _notification(what):
 	if what == MainLoop.NOTIFICATION_APPLICATION_FOCUS_IN:
 		raycast_grid(get_viewport().get_mouse_position())
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	if input.rot != 0:
 		raycast_grid(get_viewport().get_mouse_position())
 
 
 func _integrate_forces(state):
-	var velocity = Vector2()
 
 	state.angular_velocity = Vector3(0, -input.rot * rotation_speed,0).rotated(Vector3(0, 1, 0), rotation.y)
 
