@@ -60,4 +60,5 @@ hue_variation_max = 1.0
 
 [node name="SND_DRILL_LOOP" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_hbqa2")
+volume_db = -10.0
 bus = &"SFX"
