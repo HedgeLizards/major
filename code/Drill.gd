@@ -4,10 +4,14 @@ var index = 0
 var solid = false
 var powered = false
 
-signal drill
+signal start_digging
+signal stop_digging
 
 func _ready():
 	$AnimationPlayer.stop();
+	
+	connect("start_digging", SFX.play_sound_digging)
+	connect("stop_digging", SFX.stop_sound_digging)
 
 func _physics_process(delta: float):
 	var is_digging = false;
@@ -19,15 +23,19 @@ func _physics_process(delta: float):
 	
 	if is_digging:
 		# Replace this with the signal stuff
+		#emit_signal("start_digging")
+		
 		if !$SND_DRILL_LOOP.playing:
-			$SND_DRILL_LOOP.play()
+			$SND_DRILL_LOOP.play();
 		if !$CPUParticles3D.emitting:
 			$CPUParticles3D.emitting = true
 		if !$AnimationPlayer.is_playing():
 			$AnimationPlayer.play()
 	else:
+		#emit_signal("stop_digging")
+		
 		if $SND_DRILL_LOOP.playing:
-			$SND_DRILL_LOOP.stop()
+			$SND_DRILL_LOOP.stop();
 		if $CPUParticles3D.emitting:
 			$CPUParticles3D.emitting = false
 		if $AnimationPlayer.is_playing():

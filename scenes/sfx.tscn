@@ -21,7 +21,7 @@ doppler_tracking = 2
 
 [node name="SND_DRILL_LOOP" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_b8tal")
-volume_db = -5.0
+volume_db = -10.0
 max_db = 0.0
 bus = &"SFX"
 doppler_tracking = 2

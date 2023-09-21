@@ -11,8 +11,7 @@ var cooldown : float = .15
 var timer : float = 0
 
 func _ready():
-	var sfx = get_node('../../SFX')
-	connect("gun_shot", sfx.play_sound_shoot)
+	connect("gun_shot", SFX.play_sound_shoot)
 
 func _process(_delta):
 	if get_node("..").is_local() && Input.is_action_pressed("shoot") && canShoot:
