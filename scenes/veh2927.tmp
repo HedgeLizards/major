@@ -72,10 +72,6 @@ properties/1/watch = false
 [node name="Vehicle" type="Node3D"]
 script = ExtResource("2_ewdcd")
 
-[node name="AudioListener3D" type="AudioListener3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-current = true
-
 [node name="CameraHolder" type="Node3D" parent="."]
 script = ExtResource("2_1xql6")
 
