@@ -12,7 +12,7 @@ script = ExtResource("2_mlcld")
 [node name="GunMesh" parent="." instance=ExtResource("1_4qoln")]
 
 [node name="BulletSpawn" type="Node3D" parent="GunMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.631421, 0, 2.76003e-08)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Anims/RESET"
