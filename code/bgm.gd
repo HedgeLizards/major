@@ -13,10 +13,6 @@ var tween;
 func _ready():
 	for track in tracks:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(track), max_volume if track == current_track else -50)
-	
-	# Muting the music at the start for now, because gosh that's annoying when you're fixing sound effects. :'D
-	$MAIN.stop();
-	$COMBAT.stop();
 
 func crossfade_buses(to_bus_name, duration):
 	if to_bus_name == current_track:
