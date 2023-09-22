@@ -20,6 +20,7 @@ var hovered_point:
 		else:
 			DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW if hovered_point == null else DisplayServer.CURSOR_POINTING_HAND)
 var existing_point
+var existing_rotation_y
 var grabbed_position
 var lock_pointing_hand = false
 
@@ -108,6 +109,9 @@ func enable_placeholder(index, rotation_y = 0):
 	get_node('../SFX/SND_MODULE_GRAB').play()
 	
 	if placing != null:
+		if existing_point != null:
+			cancel_module_movement()
+		
 		if index == 0 || index == 3:
 			rotation_y = $Placeholder.rotation.y + PI / 2
 		
@@ -141,7 +145,7 @@ func raycast_grid(mouse_position):
 	if !building:
 		return
 	
-	var intersection_point = Plane(0, 1, 0, 0.2).intersects_ray(
+	var intersection_point = Plane(0, 1, 0, 0.8 if placing == null else 0.2).intersects_ray(
 		camera.project_ray_origin(mouse_position),
 		camera.project_ray_normal(mouse_position)
 	)
@@ -215,7 +219,8 @@ func _unhandled_input(event):
 			
 			enable_placeholder(module.index, module.rotation.y)
 			
-			existing_point = hovered_point
+			existing_point = point
+			existing_rotation_y = module.rotation.y
 			grabbed_position = event.position
 		else:
 			if event.pressed || event.position == grabbed_position:
@@ -226,11 +231,6 @@ func _unhandled_input(event):
 			get_node('../SFX/SND_MODULE_PLACE').play()
 			
 			add_module.rpc(placing, hovered_point, $Placeholder.rotation.y + PI / 2)
-			
-			if existing_point == null: # or not enough resources left
-				toggle_frees()
-			else:
-				disable_placeholder()
 	elif event is InputEventKey:
 		if event.echo || !event.pressed:
 			return
@@ -246,9 +246,38 @@ func _unhandled_input(event):
 				
 				raycast_grid(get_viewport().get_mouse_position())
 			KEY_BACKSPACE, KEY_DELETE:
+				if placing != null && existing_point != null && !are_all_modules_valid():
+					cancel_module_movement()
+				
 				disable_placeholder()
 			KEY_ESCAPE:
-				disable_placeholder() # instead revert if existing point
+				if placing != null && existing_point != null:
+					cancel_module_movement()
+				
+				disable_placeholder()
+
+func cancel_module_movement(module = null):
+	if module == null:
+		module = [
+			Drill,
+			Battery,
+			Wheel,
+			Gun,
+			Shield,
+			Mine,
+		][placing].instantiate()
+		
+		module.rotation.y = existing_rotation_y
+	
+	module.position.x = existing_point.x
+	module.position.z = existing_point.y
+	
+	add_child(module)
+	
+	modules[existing_point].queue_free()
+	modules[existing_point] = module
+	
+	existing_point = null
 
 func is_module_valid(index, point, new):
 	var offsets = [Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0), Vector2i(0, 1)]
@@ -318,11 +347,11 @@ func add_module(placing: int, point: Vector2i, rot: float):
 		Mine,
 	][placing].instantiate()
 	
+	module.rotation.y = rot
+	
 	var free = modules[point]
 	
 	modules[point] = module
-	
-	module.rotation.y = rot
 	
 	if are_all_modules_valid():
 		free.queue_free()
@@ -333,6 +362,11 @@ func add_module(placing: int, point: Vector2i, rot: float):
 		add_child(module)
 		
 		create_frees()
+		
+		if existing_point == null: # and enough resources left
+			toggle_frees()
+		else:
+			disable_placeholder()
 	elif existing_point == null:
 		module.queue_free()
 		
@@ -340,13 +374,9 @@ func add_module(placing: int, point: Vector2i, rot: float):
 	else:
 		modules[point] = free
 		
-		module.position.x = existing_point.x
-		module.position.z = existing_point.y
+		cancel_module_movement(module)
 		
-		add_child(module)
-		
-		modules[existing_point].queue_free()
-		modules[existing_point] = module
+		disable_placeholder()
 
 @rpc("any_peer", "call_local", "reliable")
 func remove_module(point: Vector2i):
