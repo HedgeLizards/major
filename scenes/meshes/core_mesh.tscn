@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://ba4qcrer4ax86" path="res://models/Textures/texInterior.tres" id="3_pcgur"]
 [ext_resource type="Material" uid="uid://c1057mhmph67w" path="res://models/Textures/texLights.tres" id="3_sepud"]
 [ext_resource type="Material" uid="uid://dwmwtsmg4hhy5" path="res://models/Textures/texPlayer.tres" id="4_udw6y"]
-[ext_resource type="Material" uid="uid://bc3pkn0a28h1v" path="res://models/Textures/texPitch.tres" id="6_q7bby"]
+[ext_resource type="Material" path="res://models/Textures/texPitch.tres" id="6_q7bby"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_uri33"]
 _surfaces = [{

@@ -4,11 +4,12 @@ var index = 3
 var solid = false
 var powered = false
 
+var canShoot : bool = true
+var cooldown : float = .05
+var timer : float = 0
+
 signal gun_shot
 
-var canShoot : bool = true
-var cooldown : float = .15
-var timer : float = 0
 
 func _ready():
 	connect("gun_shot", SFX.play_sound_shoot)
