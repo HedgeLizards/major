@@ -10,7 +10,6 @@ var timer : float = 0
 
 signal gun_shot
 
-
 func _ready():
 	connect("gun_shot", SFX.play_sound_shoot)
 
