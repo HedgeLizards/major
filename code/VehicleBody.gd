@@ -140,6 +140,8 @@ func enable_placeholder(index, rotation_y = 0):
 	raycast_grid(get_viewport().get_mouse_position())
 	
 	existing_point = null
+	
+	update_build_hint()
 
 func raycast_grid(mouse_position):
 	if !building:
@@ -183,6 +185,27 @@ func raycast_grid(mouse_position):
 		$Placeholder.position.x = hovered_point.x
 		$Placeholder.position.z = hovered_point.y
 
+func update_build_hint():
+	var build_hint = get_node('../../../UserInterface/BuildHint')
+	
+	if placing == null:
+		build_hint.visible = false
+		
+		return
+	
+	var actions = PackedStringArray()
+	
+	if placing == 0 || placing == 3:
+		actions.push_back('[R] to rotate')
+	
+	if existing_point != null:
+		actions.push_back('[Backspace] to deconstruct')
+	
+	actions.push_back('[Escape] to cancel')
+	
+	build_hint.text = '     '.join(actions)
+	build_hint.visible = true
+
 func disable_placeholder():
 	if placing == null:
 		return
@@ -195,6 +218,8 @@ func disable_placeholder():
 	toggle_frees()
 	
 	raycast_grid(get_viewport().get_mouse_position())
+	
+	update_build_hint()
 
 func disable_building():
 	building = false
@@ -221,6 +246,9 @@ func _unhandled_input(event):
 			
 			existing_point = point
 			existing_rotation_y = module.rotation.y
+			
+			update_build_hint()
+			
 			grabbed_position = event.position
 		else:
 			if event.pressed || event.position == grabbed_position:
