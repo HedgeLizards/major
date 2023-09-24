@@ -10,9 +10,12 @@ var tracks = [MAIN, COMBAT];
 var current_track = MAIN;
 var tween;
 
+var isMuted : bool = true;
+
 func _ready():
-	for track in tracks:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(track), max_volume if track == current_track else -50)
+	pass
+	#for track in tracks:
+	#	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(track), max_volume if track == current_track else -50)
 
 func crossfade_buses(to_bus_name, duration):
 	if to_bus_name == current_track:
@@ -47,5 +50,12 @@ func test_music():
 
 func mute_music():
 	if Input.is_action_just_pressed("debug_music_mute"):
-		$MAIN.stop();
-		$COMBAT.stop();
+		if isMuted:
+			$MAIN.play()
+			$COMBAT.play()
+			for track in tracks:
+				AudioServer.set_bus_volume_db(AudioServer.get_bus_index(track), max_volume if track == current_track else -50)
+		elif !isMuted:
+			$MAIN.stop()
+			$COMBAT.stop()
+		isMuted = !isMuted

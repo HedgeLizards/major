@@ -9,10 +9,8 @@ script = ExtResource("1_cl2w6")
 
 [node name="MAIN" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_k6ji5")
-autoplay = true
 bus = &"Main"
 
 [node name="COMBAT" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_p5ol0")
-autoplay = true
 bus = &"Combat"
