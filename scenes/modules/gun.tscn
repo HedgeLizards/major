@@ -1,9 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://1eem1pvt6qw3"]
+[gd_scene load_steps=7 format=3 uid="uid://1eem1pvt6qw3"]
 
 [ext_resource type="PackedScene" uid="uid://cph0xkn0a38ev" path="res://scenes/meshes/gun_mesh.tscn" id="1_4qoln"]
 [ext_resource type="Shape3D" uid="uid://b5ew65kve3cu1" path="res://resources/box_shape_3d.tres" id="1_8v83c"]
 [ext_resource type="Script" path="res://code/Gun.gd" id="2_mlcld"]
 [ext_resource type="AnimationLibrary" uid="uid://bp76puhi8rpa6" path="res://Animations/Anims.res" id="4_j7qhh"]
+
+[sub_resource type="Animation" id="Animation_5pqsm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GunMesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ssq7w"]
+_data = {
+"RESET": SubResource("Animation_5pqsm")
+}
 
 [node name="Gun" type="CollisionShape3D"]
 shape = ExtResource("1_8v83c")
@@ -17,5 +37,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Anims/RESET"
 libraries = {
+"": SubResource("AnimationLibrary_ssq7w"),
 "Anims": ExtResource("4_j7qhh")
 }
