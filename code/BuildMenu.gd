@@ -3,6 +3,8 @@ extends Control
 var screen_scale = DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
 
 func _ready():
+	$VBoxContainer6.free() # TEMPORARY
+	
 	for child in get_children():
 		child.scale *= screen_scale
 
