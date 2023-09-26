@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://q8twoq2iebrt"]
+
+[ext_resource type="Script" path="res://code/OresMenu.gd" id="1_avte6"]
+[ext_resource type="Texture2D" uid="uid://cfhbm7rgdub1j" path="res://sprites/GEM_Blue.png" id="2_tsbgr"]
+[ext_resource type="Texture2D" uid="uid://eg80d5gvpwwp" path="res://sprites/GEM_Green.png" id="3_i82br"]
+[ext_resource type="Texture2D" uid="uid://ssglrthh7gov" path="res://sprites/GEM_Red.png" id="4_4tws7"]
+[ext_resource type="Texture2D" uid="uid://bh32gwxsy4ktm" path="res://sprites/GEM_Yellow.png" id="5_r2k44"]
+
+[node name="OresMenu" type="VBoxContainer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+pivot_offset = Vector2(0, 212)
+script = ExtResource("1_avte6")
+
+[node name="Blue" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Blue"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_tsbgr")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Blue"]
+layout_mode = 2
+text = "0"
+vertical_alignment = 1
+
+[node name="Green" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Green"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_i82br")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Green"]
+layout_mode = 2
+text = "0"
+vertical_alignment = 1
+
+[node name="Red" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Red"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_4tws7")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Red"]
+layout_mode = 2
+text = "0"
+vertical_alignment = 1
+
+[node name="Yellow" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Yellow"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("5_r2k44")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Yellow"]
+layout_mode = 2
+text = "0"
+vertical_alignment = 1

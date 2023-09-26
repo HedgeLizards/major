@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://n81gfvtb48yt"]
+[gd_scene load_steps=6 format=3 uid="uid://n81gfvtb48yt"]
 
 [ext_resource type="Script" path="res://code/BuildMenu.gd" id="1_acqg8"]
+[ext_resource type="Texture2D" uid="uid://dkanhwhr6op5r" path="res://sprites/Build_icon.png" id="2_uyt8k"]
+[ext_resource type="StyleBox" uid="uid://jcty3f38kq8n" path="res://resources/style_box_empty.tres" id="2_vu7pk"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_0qw6u"]
 device = -1
@@ -36,25 +38,27 @@ grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
 
-[node name="Label1" type="Label" parent="VBoxContainer1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer1"]
 visible = false
 layout_mode = 2
-text = "3x Ore 1"
-horizontal_alignment = 1
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer1/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer1"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer1/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-text = "2x Ore 2"
-horizontal_alignment = 1
-vertical_alignment = 1
+expand_mode = 1
 
 [node name="Drill" type="Button" parent="VBoxContainer1"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
+theme_override_styles/normal = ExtResource("2_vu7pk")
 action_mode = 0
 text = "DRILL"
 
@@ -72,25 +76,27 @@ grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
 
-[node name="Label1" type="Label" parent="VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
 visible = false
 layout_mode = 2
-text = "3x Ore 1"
-horizontal_alignment = 1
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer2"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-text = "2x Ore 2"
-horizontal_alignment = 1
-vertical_alignment = 1
+expand_mode = 1
 
 [node name="Battery" type="Button" parent="VBoxContainer2"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
+theme_override_styles/normal = ExtResource("2_vu7pk")
 action_mode = 0
 text = "BATTERY"
 
@@ -108,25 +114,27 @@ grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
 
-[node name="Label1" type="Label" parent="VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer3"]
 visible = false
 layout_mode = 2
-text = "3x Ore 1"
-horizontal_alignment = 1
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer3"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-text = "2x Ore 2"
-horizontal_alignment = 1
-vertical_alignment = 1
+expand_mode = 1
 
 [node name="Wheel" type="Button" parent="VBoxContainer3"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
+theme_override_styles/normal = ExtResource("2_vu7pk")
 action_mode = 0
 text = "WHEEL"
 
@@ -144,25 +152,27 @@ grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
 
-[node name="Label1" type="Label" parent="VBoxContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer4"]
 visible = false
 layout_mode = 2
-text = "3x Ore 1"
-horizontal_alignment = 1
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer4/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer4"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-text = "2x Ore 2"
-horizontal_alignment = 1
-vertical_alignment = 1
+expand_mode = 1
 
 [node name="Gun" type="Button" parent="VBoxContainer4"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
+theme_override_styles/normal = ExtResource("2_vu7pk")
 action_mode = 0
 text = "GUN"
 
@@ -180,25 +190,27 @@ grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
 
-[node name="Label1" type="Label" parent="VBoxContainer5"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer5"]
 visible = false
 layout_mode = 2
-text = "3x Ore 1"
-horizontal_alignment = 1
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer5/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer5"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer5/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-text = "2x Ore 2"
-horizontal_alignment = 1
-vertical_alignment = 1
+expand_mode = 1
 
 [node name="Shield" type="Button" parent="VBoxContainer5"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
+theme_override_styles/normal = ExtResource("2_vu7pk")
 action_mode = 0
 text = "SHIELD"
 
@@ -216,29 +228,31 @@ grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
 
-[node name="Label1" type="Label" parent="VBoxContainer6"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer6"]
 visible = false
 layout_mode = 2
-text = "3x Ore 1"
-horizontal_alignment = 1
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer6/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer6"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer6/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
-text = "2x Ore 2"
-horizontal_alignment = 1
-vertical_alignment = 1
+expand_mode = 1
 
 [node name="Mine" type="Button" parent="VBoxContainer6"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 focus_mode = 0
 mouse_filter = 1
+theme_override_styles/normal = ExtResource("2_vu7pk")
 action_mode = 0
 text = "MINE"
 
-[node name="Build" type="Button" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = 3
@@ -246,18 +260,27 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -100.0
+offset_left = -40.0
+offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Build" type="TextureButton" parent="MarginContainer"]
+layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 action_mode = 0
 shortcut = SubResource("Shortcut_73dm8")
 shortcut_feedback = false
-text = "BUILD"
+texture_normal = ExtResource("2_uyt8k")
+ignore_texture_size = true
+stretch_mode = 0
 
 [connection signal="mouse_entered" from="VBoxContainer1/Drill" to="." method="show_labels" binds= [0]]
 [connection signal="mouse_exited" from="VBoxContainer1/Drill" to="." method="hide_labels" binds= [0]]
@@ -277,4 +300,4 @@ text = "BUILD"
 [connection signal="mouse_entered" from="VBoxContainer6/Mine" to="." method="show_labels" binds= [5]]
 [connection signal="mouse_exited" from="VBoxContainer6/Mine" to="." method="hide_labels" binds= [5]]
 [connection signal="pressed" from="VBoxContainer6/Mine" to="." method="enable_placeholder" binds= [5]]
-[connection signal="toggled" from="Build" to="." method="_on_build_toggled"]
+[connection signal="toggled" from="MarginContainer/Build" to="." method="_on_build_toggled"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://2irnh6o5hk08"]
+[gd_scene load_steps=17 format=3 uid="uid://2irnh6o5hk08"]
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_kh57m"]
 [ext_resource type="PackedScene" uid="uid://n81gfvtb48yt" path="res://scenes/build_menu.tscn" id="2_8cdw3"]
 [ext_resource type="Material" uid="uid://b1ofjqa7sx87k" path="res://models/Textures/texFloor.tres" id="2_xn5t0"]
+[ext_resource type="PackedScene" uid="uid://q8twoq2iebrt" path="res://scenes/ores_menu.tscn" id="3_1ovdw"]
 [ext_resource type="PackedScene" uid="uid://c6eg277q0xoij" path="res://scenes/pebbles.tscn" id="3_eww8l"]
 [ext_resource type="Script" path="res://code/Environment.gd" id="4_c36pg"]
 [ext_resource type="Script" path="res://code/BuildHint.gd" id="4_l0t6d"]
@@ -111,6 +112,10 @@ grow_horizontal = 2
 grow_vertical = 0
 horizontal_alignment = 1
 script = ExtResource("4_l0t6d")
+
+[node name="OresMenu" parent="UserInterface" instance=ExtResource("3_1ovdw")]
+offset_top = -212.0
+offset_right = 64.0
 
 [node name="Pebbles" parent="." instance=ExtResource("3_eww8l")]
 transform = Transform3D(9.51373, 0, 0, 0, 9.51373, 0, 0, 0, 9.51373, -0.000203848, 0, -2.81323)

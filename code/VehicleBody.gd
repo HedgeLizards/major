@@ -274,8 +274,11 @@ func _unhandled_input(event):
 				
 				raycast_grid(get_viewport().get_mouse_position())
 			KEY_BACKSPACE, KEY_DELETE:
-				if placing != null && existing_point != null && !are_all_modules_valid():
-					cancel_module_movement()
+				if placing != null && existing_point != null:
+					if are_all_modules_valid():
+						get_node('../../../UserInterface/BuildMenu').deconstruct_module(placing)
+					else:
+						cancel_module_movement()
 				
 				disable_placeholder()
 			KEY_ESCAPE:
@@ -391,7 +394,7 @@ func add_module(placing: int, point: Vector2i, rot: float):
 		
 		create_frees()
 		
-		if existing_point == null: # and enough resources left
+		if existing_point == null && get_node('../../../UserInterface/BuildMenu').construct_module(placing):
 			toggle_frees()
 		else:
 			disable_placeholder()
