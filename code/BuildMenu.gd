@@ -1,11 +1,11 @@
 extends Control
 
 var costs = [
-	{ 'Red': 1, 'Yellow': 1 }, # Drill
-	{ 'Green': 2, 'Yellow': 3 }, # Battery
-	{ 'Blue': 2, 'Yellow': 1 }, # Wheel
-	{ 'Blue': 1, 'Red': 2, 'Yellow': 1 }, # Gun
-	{ 'Green': 2 }, # Shield
+	{ 'Blue': 2, 'Red': 1 }, # Drill
+	{ 'Green': 2, 'Red': 3 }, # Battery
+	{ 'Green': 3, 'Yellow': 1 }, # Wheel
+	{ 'Blue': 3, 'Red': 1, 'Yellow': 2 }, # Gun
+	{ 'Yellow': 2 }, # Shield
 ]
 var screen_scale = DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
 
