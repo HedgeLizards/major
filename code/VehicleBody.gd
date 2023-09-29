@@ -110,7 +110,7 @@ func enable_placeholder(index, rotation_y = 0):
 	
 	if placing != null:
 		if existing_point != null:
-			cancel_module_movement()
+			cancel_module_movement.rpc(placing, existing_point, existing_rotation_y)
 		
 		if index == 0 || index == 3:
 			rotation_y = $Placeholder.rotation.y + PI / 2
@@ -224,6 +224,9 @@ func disable_placeholder():
 func disable_building():
 	building = false
 	
+	if placing != null && existing_point != null:
+		cancel_module_movement.rpc(placing, existing_point, existing_rotation_y)
+	
 	disable_placeholder()
 
 func _unhandled_input(event):
@@ -278,17 +281,18 @@ func _unhandled_input(event):
 					if are_all_modules_valid():
 						get_node('../../../UserInterface/BuildMenu').deconstruct_module(placing)
 					else:
-						cancel_module_movement()
+						cancel_module_movement.rpc(placing, existing_point, existing_rotation_y)
 				
 				disable_placeholder()
 			KEY_ESCAPE:
 				if placing != null && existing_point != null:
-					cancel_module_movement()
+					cancel_module_movement.rpc(placing, existing_point, existing_rotation_y)
 				
 				disable_placeholder()
 
-func cancel_module_movement(module = null):
-	if module == null:
+@rpc("any_peer", "call_local", "reliable")
+func cancel_module_movement(placing, point, rot, module = null):
+	if module == null || module is EncodedObjectAsID:
 		module = [
 			Drill,
 			Battery,
@@ -298,17 +302,19 @@ func cancel_module_movement(module = null):
 			Mine,
 		][placing].instantiate()
 		
-		module.rotation.y = existing_rotation_y
+		module.rotation.y = rot
 	
-	module.position.x = existing_point.x
-	module.position.z = existing_point.y
+	module.position.x = point.x
+	module.position.z = point.y
 	
 	add_child(module)
 	
-	modules[existing_point].queue_free()
-	modules[existing_point] = module
+	modules[point].queue_free()
+	modules[point] = module
 	
 	existing_point = null
+	
+	create_frees()
 
 func is_module_valid(index, point, new):
 	var offsets = [Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0), Vector2i(0, 1)]
@@ -394,7 +400,7 @@ func add_module(placing: int, point: Vector2i, rot: float):
 		
 		create_frees()
 		
-		if existing_point == null && get_node('../../../UserInterface/BuildMenu').construct_module(placing):
+		if existing_point == null && is_local() && get_node('../../../UserInterface/BuildMenu').construct_module(placing):
 			toggle_frees()
 		else:
 			disable_placeholder()
@@ -405,7 +411,7 @@ func add_module(placing: int, point: Vector2i, rot: float):
 	else:
 		modules[point] = free
 		
-		cancel_module_movement(module)
+		cancel_module_movement.rpc(placing, existing_point, existing_rotation_y, module)
 		
 		disable_placeholder()
 
